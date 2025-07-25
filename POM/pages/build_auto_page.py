@@ -1,20 +1,58 @@
 from POM.pages.base_page import BasePage
 from POM.locators.build_auto_locators import BuildAutoLocators as el  
 
-class PrimaryPage(BasePage):
+class BuildAutoPage(BasePage):
     def __init__(self, browser):
         super().__init__(browser)
         self.browser = browser
 
-    # Header clicks 
-    def click_header(self, header_name):
-        locator_name = f"{header_name.upper()}_HEADER"
-        locator = getattr(el, locator_name, None)   
-        
+    # Home clicks
+    def click_home_header(self):
         self.safe_click(
-        locator,
-        description=f"{header_name} header",
-        fallback_message=f"[click_header] Invalid header name: {header_name}")
+            el.HOME_HEADER,
+            description="Home Header",
+            fallback_message="[click_home_header] Home header locator not found"
+        )
+
+    # Course clicks
+    def click_courses_header(self): 
+        self.safe_click(
+            el.COURSES_HEADER,
+            description="Courses Header",
+            fallback_message="[click_courses_header] Courses header locator not found"
+        )
+
+    # Resources clicks
+    def click_resources_header(self):   
+        self.safe_click(
+            el.RESOURCES_HEADER,
+            description="Resources Header",
+            fallback_message="[click_resources_header] Resources header locator not found"
+        )
+    
+    # Community clicks
+    def click_community_header(self):
+        self.safe_click(
+            el.COMMUNITY_HEADER,
+            description="Community Header",
+            fallback_message="[click_community_header] Community header locator not found"
+        )
+
+    # About clicks
+    def click_about_header(self):
+        self.safe_click(
+            el.ABOUT_HEADER,
+            description="About Header",
+            fallback_message="[click_about_header] About header locator not found"
+        )
+    
+    # Contact clicks
+    def click_contact_header(self):
+        self.safe_click(
+            el.CONTACT_HEADER,
+            description="Contact Header",
+            fallback_message="[click_contact_header] Contact header locator not found"
+        )
 
     # Hero button clicks
     def click_start_learning(self):
@@ -40,21 +78,27 @@ class PrimaryPage(BasePage):
             )      
 
     # Resource clicks       
-    def click_resource_block(self, block_type):     
-        block_type = block_type.upper()
-        locator_map = {
-            "PDF": el.RESOURCES_BLOCK_PDF,
-            "VIDEO": el.RESOURCES_BLOCK_VIDEO,
-            "CODEEX": el.RESOURCES_BLOCK_CODEEX
-        }
-        locator = locator_map.get(block_type)   
-
+    def click_pdf_resource_block(self):
         self.safe_click(
-                locator,
-                description=f"{block_type} resource block",
-                fallback_message=f"[click_resource_block] Invalid resource block type: {block_type}"
-            )
+            el.RESOURCES_BLOCK_PDF,
+            description="PDF resource block",
+            fallback_message="[click_pdf_resource_block] Locator not found"
+        )
 
+    def click_video_resource_block(self):
+        self.safe_click(
+            el.RESOURCES_BLOCK_VIDEO,
+            description="VIDEO resource block",
+            fallback_message="[click_video_resource_block] Locator not found"
+        )
+
+    def click_codeex_resource_block(self):
+        self.safe_click(
+            el.RESOURCES_BLOCK_CODEEX,
+            description="CODEEX resource block",
+            fallback_message="[click_codeex_resource_block] Locator not found"
+        )
+        
     def click_resource_download_icon(self):
         self.safe_click(
             el.RESOURCES_DOWNLOAD_ICON,
