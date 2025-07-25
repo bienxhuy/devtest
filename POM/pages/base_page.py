@@ -1,24 +1,10 @@
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
-
-class BasePage:
-    def __init__(self, driver):
-        self.driver = driver # Store the WebDriver instance for use in other methods
-    
-    # This method tries to find an element by using XPath
-    # TODO: Fix the method to capture screenshot the element when it fails
-    def get_element(self, locator):
-        try:
-            element = self.driver.find_element(By.XPATH, locator)
-            return element
-        except NoSuchElementException:
-            print(f"No elements found for locator: {locator}")
-            return None
-
-    # base_page.py
+import os
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+from datetime import datetime
+
+SCREENSHOT_DIR = "../utils/screenshots"
 
 class BasePage:
     def __init__(self, driver):
@@ -27,9 +13,11 @@ class BasePage:
     # This method safely clicks an element, waiting for it to be clickable
     # TODO: Add ultility methods: safe_send_keys, safe_get_element_text
     # is_element_visible
-    def safe_click(self, locator, description="element", fallback_message=None, timeout=10):
+    def safe_click(self, locator, description="element",
+               fallback_message=None, timeout=10):
         if not locator:
-            print(fallback_message or f"[safe_click] No locator provided for '{description}'")
+            print(fallback_message or
+                f"[safe_click] No locator for '{description}'")
             return
 
         try:
@@ -39,6 +27,19 @@ class BasePage:
             element.click()
             print(f"[safe_click] Clicked on '{description}'")
         except TimeoutException:
-            print(f"[safe_click] Timeout: Could not find clickable '{description}'")
+            print(f"[safe_click] Timeout: '{description}' not clickable")
+            self._take_screenshot(description)
         except Exception as e:
             print(f"[safe_click] Error clicking '{description}': {e}")
+            self._take_screenshot(description)
+
+    # This method takes a screenshot and saves it with a timestamp
+    def take_screenshot(self, name = "error"):
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"{name.replace(' ', '_')}_{timestamp}.png"
+        filepath = os.path.join(SCREENSHOT_DIR, filename)
+        try:
+            self.driver.save_screenshot(filepath)
+            print(f"[safe_click] Screenshot saved to: {filepath}")
+        except Exception as e:
+            print(f"[safe_click] Failed to take screenshot: {e}")
