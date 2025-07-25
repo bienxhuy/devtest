@@ -6,52 +6,59 @@ class BuildAutoPage(BasePage):
         super().__init__(browser)
         self.browser = browser
 
-    # Home clicks
+    # Header clicks 
     def click_home_header(self):
         self.safe_click(
             el.HOME_HEADER,
             description="Home Header",
-            fallback_message="[click_home_header] Home header locator not found"
+            fallback_message=(
+                "[click_home_header] Home header locator not found"
+            )
         )
 
-    # Course clicks
-    def click_courses_header(self): 
+    def click_courses_header(self):
         self.safe_click(
             el.COURSES_HEADER,
             description="Courses Header",
-            fallback_message="[click_courses_header] Courses header locator not found"
+            fallback_message=(
+                "[click_courses_header] Courses header locator not found"
+            )
         )
 
-    # Resources clicks
-    def click_resources_header(self):   
+    def click_resources_header(self):
         self.safe_click(
             el.RESOURCES_HEADER,
             description="Resources Header",
-            fallback_message="[click_resources_header] Resources header locator not found"
+            fallback_message=(
+                "[click_resources_header] Resources header locator not found"
+            )
         )
-    
-    # Community clicks
+
     def click_community_header(self):
         self.safe_click(
             el.COMMUNITY_HEADER,
             description="Community Header",
-            fallback_message="[click_community_header] Community header locator not found"
+            fallback_message=(
+                "[click_community_header] Community header locator not found"
+            )
         )
 
-    # About clicks
     def click_about_header(self):
         self.safe_click(
             el.ABOUT_HEADER,
             description="About Header",
-            fallback_message="[click_about_header] About header locator not found"
+            fallback_message=(
+                "[click_about_header] About header locator not found"
+            )
         )
-    
-    # Contact clicks
+
     def click_contact_header(self):
         self.safe_click(
             el.CONTACT_HEADER,
             description="Contact Header",
-            fallback_message="[click_contact_header] Contact header locator not found"
+            fallback_message=(
+                "[click_contact_header] Contact header locator not found"
+            )
         )
 
     # Hero button clicks
