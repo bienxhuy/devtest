@@ -1,5 +1,5 @@
 from POM.pages.base_page import BasePage
-from POM.locators.home_page_locators import BuildAutoLocators as el  
+from POM.locators.home_page_locators import HomePageLocators as el  
 
 class HomePage(BasePage):
     def __init__(self, driver):
