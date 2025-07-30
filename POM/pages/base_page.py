@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from datetime import datetime
 
-from logging.logger import get_logger 
+from logs.logger import get_logger 
 
 # Use module-specific logger
 logger = get_logger(__name__)
