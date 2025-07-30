@@ -1,4 +1,5 @@
 import os
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
@@ -29,9 +30,10 @@ class BasePage:
             return
 
         try:
-            element = WebDriverWait(self.driver, timeout).until(
-                EC.element_to_be_clickable(locator)
-            )
+            # element = WebDriverWait(self.driver, timeout).until(
+            #     EC.element_to_be_clickable(locator)
+            # )
+            element = self.driver.find_element(By.XPATH, locator)
             element.click()
             logger.info(f"[safe_click] Clicked on '{description}'")
 
