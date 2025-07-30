@@ -15,12 +15,12 @@ BASE_URL = os.getenv('BASE_URL')
 # This test will ensure that the home page loads correctly,
 # and all components are clickable
 @pytest.mark.smoke
-def test_build_auto_tw_page(browser):
+def test_build_auto_tw_page(driver):
     # Initialize the HomePage object
-    page = HomePage(driver=browser)
+    page = HomePage(driver=driver)
     # Navigate to the base URL
-    browser.get(BASE_URL)
-    
+    driver.get(BASE_URL)
+
     # Click on every component in the page
     # TODO: Implement the logic to click on each component
     # Example:

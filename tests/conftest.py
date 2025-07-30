@@ -9,10 +9,10 @@ from selenium import webdriver
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 
-# This is a pytest fixture that initializes a browser instance for testing
-# Provides a browser instance to the tests
+# This is a pytest fixture that initializes a driver instance for testing
+# Provides a driver instance to the tests
 @pytest.fixture(scope="session")
-def browser():
+def driver():
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
     driver = webdriver.Chrome(options=options)
