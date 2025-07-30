@@ -2,16 +2,23 @@ import os
 import sys
 import pytest
 from dotenv import load_dotenv
-from POM.pages.home_page import PrimaryPage
+from POM.pages.home_page import HomePage
+
 
 # Load environment variables from .env file
 load_dotenv()
 # Get the base URL from environment variables
 BASE_URL = os.getenv('BASE_URL')
 
+
+# This is a test for the home page of the application
+# This test will ensure that the home page loads correctly,
+# and all components are clickable
 @pytest.mark.smoke
 def test_build_auto_tw_page(browser):
-    page = PrimaryPage(browser=browser)
+    # Initialize the HomePage object
+    page = HomePage(driver=browser)
+    # Navigate to the base URL
     browser.get(BASE_URL)
     
     # Click on every component in the page
