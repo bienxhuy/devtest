@@ -30,12 +30,12 @@ class BasePage:
             return
 
         try:
-            # element = WebDriverWait(self.driver, timeout).until(
-            #     EC.element_to_be_clickable(locator)
-            # )
-            element = self.driver.find_element(By.XPATH, locator)
+            element = WebDriverWait(self.driver, timeout).until(
+                EC.element_to_be_clickable((By.XPATH,locator))
+            )
             element.click()
             logger.info(f"[safe_click] Clicked on '{description}'")
+            return True
 
         except TimeoutException:
             logger.error(
@@ -49,6 +49,8 @@ class BasePage:
                 f"[safe_click] Error clicking on '{description}': {e}"
             )
             self.take_screenshot(description)
+            
+        return False
 
             
     # This method takes a screenshot and saves it with a timestamp
