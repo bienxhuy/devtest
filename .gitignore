@@ -207,4 +207,4 @@ marimo/_lsp/
 __marimo__/
 
 # Report file of pytest
-/report.html
+report.html
