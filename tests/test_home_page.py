@@ -2,7 +2,7 @@ import os
 import sys
 import pytest
 from dotenv import load_dotenv
-from POM.pages.build_auto_tw_page import PrimaryPage
+from POM.pages.home_page import PrimaryPage
 
 # Load environment variables from .env file
 load_dotenv()
