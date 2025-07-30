@@ -1,10 +1,9 @@
 from POM.pages.base_page import BasePage
-from POM.locators.build_auto_locators import BuildAutoLocators as el  
+from POM.locators.home_page_locators import BuildAutoLocators as el  
 
-class BuildAutoPage(BasePage):
-    def __init__(self, browser):
-        super().__init__(browser)
-        self.browser = browser
+class HomePage(BasePage):
+    def __init__(self, driver):
+        super().__init__(driver)
 
     # Header clicks 
     def click_home_header(self):

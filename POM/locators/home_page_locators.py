@@ -1,4 +1,4 @@
-class BuildAppLocators:
+class HomePageLocators:
     # Header
     HOME_HEADER = "//a[text() = 'home']"
     COURSES_HEADER = "//a[text() = 'courses']"

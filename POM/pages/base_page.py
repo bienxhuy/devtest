@@ -1,11 +1,10 @@
 import os
-import logging
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from datetime import datetime
 
-from POM.pages.logger import get_logger 
+from logging.logger import get_logger 
 
 # Use module-specific logger
 logger = get_logger(__name__)
@@ -41,13 +40,13 @@ class BasePage:
                 f"[safe_click] Timeout while waiting for "
                 f"'{description}' to be clickable"
             )
-            self._take_screenshot(description)
+            self.take_screenshot(description)
 
         except Exception as e:
             logger.error(
                 f"[safe_click] Error clicking on '{description}': {e}"
             )
-            self._take_screenshot(description)
+            self.take_screenshot(description)
 
             
     # This method takes a screenshot and saves it with a timestamp
