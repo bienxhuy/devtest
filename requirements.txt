@@ -4,3 +4,4 @@ python-dotenv==1.0.1
 selenium==4.21.0
 webdriver_manager==4.0.1
 pytest-xdist==3.6.1
+pytest-html==4.1.1
