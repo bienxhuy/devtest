@@ -1,6 +1,4 @@
 import pytest
-import sys
-import os
 from selenium import webdriver
 
 
