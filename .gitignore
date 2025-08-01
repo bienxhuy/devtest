@@ -209,3 +209,6 @@ __marimo__/
 # Report file of pytest
 report/
 report.html
+
+# Screenshots
+utils/screenshots/
