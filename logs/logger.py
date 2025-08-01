@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 # Get the log directory from environment variables or use a default
+# TODO: Create sub folder for logs of each test session
 LOG_DIR = os.getenv('LOG_DIR', 'logs/logs_data')
 os.makedirs(LOG_DIR, exist_ok=True)
 # Create a unique log file name based on the current timestamp and worker ID (xdist)
