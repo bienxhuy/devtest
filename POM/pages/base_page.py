@@ -4,13 +4,19 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from datetime import datetime
+from logs.logger import get_logger
+from dotenv import load_dotenv
 
-from logs.logger import get_logger 
 
+# Load environment variables from .env file
+load_dotenv()
 # Use module-specific logger
 logger = get_logger(__name__)
+# Directory to save screenshots
+# TODO: Create sub folder for screenshots of each test session
+SCREENSHOT_DIR = os.getenv('SCREENSHOT_DIR', 'utils/screenshots')
+os.makedirs(SCREENSHOT_DIR, exist_ok=True)
 
-SCREENSHOT_DIR = "../utils/screenshots"
 
 # BasePage class    
 class BasePage: 
@@ -51,13 +57,12 @@ class BasePage:
             self.take_screenshot(description)
             
         return False
-
-            
+          
     # This method takes a screenshot and saves it with a timestamp
     def take_screenshot(self, name = "error"):
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         filename = f"{name.replace(' ', '_')}_{timestamp}.png"
-        filepath = os.path.join(SCREENSHOT_DIR, filename)
+        filepath = SCREENSHOT_DIR + "/" + filename
         try:
             self.driver.save_screenshot(filepath)
             logger.info(f"[safe_click] Screenshot saved to: {filepath}")
