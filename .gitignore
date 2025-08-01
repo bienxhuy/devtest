@@ -212,3 +212,6 @@ report.html
 
 # Screenshots
 utils/screenshots/
+
+# Logs
+logs/logs_data
