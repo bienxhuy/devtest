@@ -32,7 +32,6 @@ class BasePage:
             message = (fallback_message or
                     f"[safe_click] No locator for '{description}'")
             logger.warning(message)
-            self.take_screenshot(description)
             return
 
         try:
@@ -48,23 +47,10 @@ class BasePage:
                 f"[safe_click] Timeout while waiting for "
                 f"'{description}' to be clickable"
             )
-            self.take_screenshot(description)
 
         except Exception as e:
             logger.error(
                 f"[safe_click] Error clicking on '{description}': {e}"
             )
-            self.take_screenshot(description)
             
         return False
-          
-    # This method takes a screenshot and saves it with a timestamp
-    def take_screenshot(self, name = "error"):
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"{name.replace(' ', '_')}_{timestamp}.png"
-        filepath = SCREENSHOT_DIR + "/" + filename
-        try:
-            self.driver.save_screenshot(filepath)
-            logger.info(f"[safe_click] Screenshot saved to: {filepath}")
-        except Exception as e:
-            logger.info(f"[safe_click] Failed to take screenshot: {e}")
