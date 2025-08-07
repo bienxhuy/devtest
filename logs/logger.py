@@ -46,7 +46,7 @@ from models.TestContext import context as ctx
 
 # Log the test result with line protocol format
 # i.e: table,t1=v1,t2=v2 f1=v1,f2=v2 timestamp
-def log_test_result(field, log_level):
+def log_test_result(field):
     # In case dev forget to use Field class
     if not isinstance(field, Field):
         logger.error(
