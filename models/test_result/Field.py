@@ -1,3 +1,5 @@
+import logging
+
 class Field:
     def __init__(self):
         self.status = None
@@ -20,3 +22,17 @@ class Field:
     def set_duration(self, duration):
         self.duration = duration
         return self
+    
+    def get_log_level(self):
+        if self.log_level == logging.DEBUG:
+            return "DEBUG"
+        elif self.log_level == logging.INFO:
+            return "INFO"
+        elif self.log_level == logging.WARNING:
+            return "WARNING"
+        elif self.log_level == logging.ERROR:
+            return "ERROR"
+        elif self.log_level == logging.CRITICAL:
+            return "CRITICAL"
+        else:
+            return "INFO"

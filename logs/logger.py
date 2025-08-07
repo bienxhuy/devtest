@@ -50,24 +50,24 @@ def log_test_result(field):
     # In case dev forget to use Field class
     if not isinstance(field, Field):
         logger.error(
-            f"""commit={ctx.commit},
-            branch={ctx.branch},
-            env={ctx.env},
-            test_suite={ctx.test_suite},
-            test_case={ctx.test_case} 
-            message='Poor test result field: {field}'"""
+            f"commit={ctx.commit},"
+            f"branch={ctx.branch},"
+            f"env={ctx.env},"
+            f"test_suite={ctx.test_suite},"
+            f"test_case={ctx.test_case} "
+            f"message='Poor test result field: {field}'"
         )
         return
 
     # Log the test result with the appropriate log level
-    logger.log(
-        f"""commit={ctx.commit},
-            branch={ctx.branch},
-            env={ctx.env},
-            test_suite={ctx.test_suite},
-            test_case={ctx.test_case} 
-            status={field.status},
-            log_level={field.log_level},
-            message={field.message},
-            duration={field.duration}"""
+    logger.log(level=field.log_level, msg=
+        f"commit={ctx.commit},"
+        f"branch={ctx.branch},"
+        f"env={ctx.env},"
+        f"test_suite={ctx.test_suite},"
+        f"test_case={ctx.test_case} "
+        f"status={field.status},"
+        f"log_level={field.get_log_level},"
+        f"message={field.message},"
+        f"duration={field.duration}"
     )
