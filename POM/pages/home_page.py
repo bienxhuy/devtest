@@ -1,4 +1,4 @@
-from POM.notifications.home_page_notifications import HomePageNotifications
+from POM.notifications.home_page_notifications import HomePageNotifications as Noti
 from POM.pages.base_page import BasePage
 from POM.locators.home_page_locators import HomePageLocators as el  
 
@@ -8,36 +8,24 @@ class HomePage(BasePage):
 
     # Header clicks 
     def click_home_header(self):
-        isSuccess = self.safe_click(
+        return self.safe_click(
             el.HOME_HEADER,
-            description="Home Header",
-            fallback_message=(
-                "[click_home_header] Home header locator not found"
-            )
+            element="Home Header",
+            success_message=Noti.HEADER_CLICKED_SUCCESS,
         )
-        if (isSuccess):
-            return HomePageNotifications.HEADER_CLICKED_SUCCESS_NOTIFICATION
 
     # Hero button clicks
     def click_start_learning(self):
-        isSuccess = self.safe_click(
+        return self.safe_click(
             el.START_LEARNING_BUTTON,
-            description="Start Learning button",
-            fallback_message=(
-                "[click_start_learning] Start Learning button locator not found"
-            )
+            element="Start Learning button",
+            success_message=Noti.START_BUTTON_CLICKED_SUCCESS,
         )
-        if (isSuccess):
-            return HomePageNotifications.START_LEARNING_BUTTON_CLICKED_SUCCESS_NOTIFICATION
     
     # Click Enroll Course button
     def click_enroll_button(self):
-        isSuccess = self.safe_click(
+        return self.safe_click(
             el.ENROLL_COURSE_BUTTON,
-            description="Enroll Selenium Button",
-            fallback_message=(
-                "[click_all_enroll_button] Enroll Selenium Button locator not found"
-            )
+            element="Enroll Selenium Button",
+            success_message=Noti.ENROLL_BUTTON_CLICKED_SUCCESS,
         )
-        if (isSuccess):
-            return HomePageNotifications.ENROLL_COURSE_BUTTON_CLICKED_SUCCESS_NOTIFICATION
