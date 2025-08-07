@@ -2,6 +2,7 @@
 import logging
 import os
 from dotenv import load_dotenv
+import MicrosecondFormatter
 
 
 # Create a directory for logs if it doesn't exist
@@ -27,8 +28,8 @@ def get_logger(name=__name__):
     # Check if the logger already has handlers to avoid duplicate logs
     if not logger.handlers:
         # Follow line protocol of influxdb
-        formatter = logging.Formatter(
-            f'{TABLE_NAME},%(message)s %(created)f'
+        formatter = MicrosecondFormatter(
+            f'{TABLE_NAME},%(message)s %(unix_micro_ts)d'
         )
         file_handler = logging.FileHandler(LOG_FILE)
         file_handler.setFormatter(formatter)
@@ -47,27 +48,37 @@ from models.TestContext import context as ctx
 # Log the test result with line protocol format
 # i.e: table,t1=v1,t2=v2 f1=v1,f2=v2 timestamp
 def log_test_result(field):
+    # Escape special characters in the field values
+    # This is necessary to ensure that the values are correctly formatted
+    def escape(s): 
+        return str(s).replace(' ', r'\ ').replace(',', r'\,').replace('=', r'\=')
+    
+    # Quote the string values
+    # Follow line protocol format of influxdb
+    def quote(s):
+        return f'"{s}"'
+
     # In case dev forget to use Field class
     if not isinstance(field, Field):
         logger.error(
-            f"commit={ctx.commit},"
-            f"branch={ctx.branch},"
-            f"env={ctx.env},"
-            f"test_suite={ctx.test_suite},"
-            f"test_case={ctx.test_case} "
-            f"message='Poor test result field: {field}'"
+            f"commit={escape(ctx.commit)},"
+            f"branch={escape(ctx.branch)},"
+            f"env={escape(ctx.env)},"
+            f"test_suite={escape(ctx.test_suite)},"
+            f"test_case={escape(ctx.test_case)} "
+            f"message=Poor test result field: {quote(field)}"
         )
         return
 
     # Log the test result with the appropriate log level
     logger.log(level=field.log_level, msg=
-        f"commit={ctx.commit},"
-        f"branch={ctx.branch},"
-        f"env={ctx.env},"
-        f"test_suite={ctx.test_suite},"
-        f"test_case={ctx.test_case} "
-        f"status={field.status},"
-        f"log_level={field.get_log_level},"
-        f"message={field.message},"
-        f"duration={field.duration}"
+        f"commit={escape(ctx.commit)},"
+        f"branch={escape(ctx.branch)},"
+        f"env={escape(ctx.env)},"
+        f"test_suite={escape(ctx.test_suite)},"
+        f"test_case={escape(ctx.test_case)} "
+        f"status={quote(field.status)},"
+        f"log_level={quote(field.get_log_level())},"
+        f"message={quote(field.message)},"
+        f"duration={field.duration},"
     )
