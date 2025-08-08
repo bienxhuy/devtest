@@ -2,7 +2,7 @@
 import logging
 import os
 from dotenv import load_dotenv
-import logs.custom_formatters.MicrosecondFormatter as MicrosecondFormatter
+from logs.custom_formatters.MicrosecondFormatter import MicrosecondFormatter
 
 
 # Create a directory for logs if it doesn't exist
