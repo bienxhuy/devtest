@@ -1,6 +1,13 @@
 # logger.py
-import logging
+import logging, os
+from dotenv import load_dotenv
 from logging.handlers import SocketHandler
+
+
+# Load log collector host
+load_dotenv()
+LOG_COLLECTOR_HOST = os.getenv("LOG_COLLECTOR_HOST")
+LOG_COLLECTOR_PORT = int(os.getenv("LOG_COLLECTOR_PORT"))
 
 
 # Get a logger instance, creating it if it doesn't exist
@@ -13,7 +20,7 @@ def get_logger(name=__name__):
     # Check if the logger already has handlers to avoid duplicate logs
     if not logger.handlers:
         # Add socket handler for logging to a remote server
-        socket_handler = SocketHandler("localhost", 9020)
+        socket_handler = SocketHandler(LOG_COLLECTOR_HOST, LOG_COLLECTOR_PORT)
         logger.addHandler(socket_handler)
         logger.propagate = False
 
