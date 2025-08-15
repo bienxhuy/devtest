@@ -1,21 +1,6 @@
 # logger.py
 import logging
-import os
-from dotenv import load_dotenv
-from logs.custom_formatters.MicrosecondFormatter import MicrosecondFormatter
-
-
-# Create a directory for logs if it doesn't exist
-# This is used to store logs taken during a test session
-load_dotenv()
-BASE_LOG_DIR = os.getenv('LOG_DIR', 'logs/logs_data')
-LOG_DIR = os.path.join(BASE_LOG_DIR, os.getenv('SESSION_ID', 'none_specified_session'))
-os.makedirs(LOG_DIR, exist_ok=True)
-# Create a unique log file name based on worker ID (xdist)
-WORKER_ID = os.getenv("PYTEST_XDIST_WORKER", "main")
-LOG_FILE = os.path.join(LOG_DIR, f"{WORKER_ID}.log")
-# Get table name of database from environment variables
-TABLE_NAME = os.getenv('TABLE_NAME', 'test_results')
+from logging.handlers import SocketHandler
 
 
 # Get a logger instance, creating it if it doesn't exist
@@ -27,14 +12,11 @@ def get_logger(name=__name__):
 
     # Check if the logger already has handlers to avoid duplicate logs
     if not logger.handlers:
-        # Follow line protocol of influxdb
-        formatter = MicrosecondFormatter(
-            f'{TABLE_NAME},%(message)s %(unix_micro_ts)d'
-        )
-        file_handler = logging.FileHandler(LOG_FILE)
-        file_handler.setFormatter(formatter)
-        logger.addHandler(file_handler)
-                
+        # Add socket handler for logging to a remote server
+        socket_handler = SocketHandler("localhost", 9020)
+        logger.addHandler(socket_handler)
+        logger.propagate = False
+
     return logger
 
 
@@ -80,5 +62,5 @@ def log_test_result(field):
         f"status={quote(field.status)},"
         f"log_level={quote(field.get_log_level())},"
         f"message={quote(field.message)},"
-        f"duration={field.duration},"
+        f"duration={field.duration}"
     )
