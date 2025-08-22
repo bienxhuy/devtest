@@ -1,13 +1,20 @@
 # logger.py
 import logging, os
 from dotenv import load_dotenv
-from logging.handlers import SocketHandler
+from logs.custom_formatters.MicrosecondFormatter import MicrosecondFormatter
 
 
-# Load log collector host
+# Create a directory for logs if it doesn't exist
+# This is used to store logs taken during a test session
 load_dotenv()
-LOG_COLLECTOR_HOST = os.getenv("LOG_COLLECTOR_HOST")
-LOG_COLLECTOR_PORT = int(os.getenv("LOG_COLLECTOR_PORT"))
+BASE_LOG_DIR = os.getenv('LOG_DIR', 'logs/logs_data')
+LOG_DIR = os.path.join(BASE_LOG_DIR, os.getenv('SESSION_ID', 'none_specified_session'))
+os.makedirs(LOG_DIR, exist_ok=True)
+# Create a unique log file name based on worker ID (xdist)
+WORKER_ID = os.getenv("PYTEST_XDIST_WORKER", "main")
+LOG_FILE = os.path.join(LOG_DIR, f"{WORKER_ID}.log")
+# Get table name of database from environment variables
+TABLE_NAME = os.getenv('TABLE_NAME', 'test_results')
 
 
 # Get a logger instance, creating it if it doesn't exist
@@ -19,10 +26,13 @@ def get_logger(name=__name__):
 
     # Check if the logger already has handlers to avoid duplicate logs
     if not logger.handlers:
-        # Add socket handler for logging to a remote server
-        socket_handler = SocketHandler(LOG_COLLECTOR_HOST, LOG_COLLECTOR_PORT)
-        logger.addHandler(socket_handler)
-        logger.propagate = False
+        # Add file handler and formatter
+        formatter = MicrosecondFormatter(
+            f'{TABLE_NAME},%(message)s %(unix_micro_ts)d'
+        )
+        file_handler = logging.FileHandler(LOG_FILE)
+        file_handler.setFormatter(formatter)
+        logger.addHandler(file_handler)
 
     return logger
 
