@@ -218,3 +218,4 @@ logs/logs_data
 
 # Test result
 junit_results.xml
+junit.xml
