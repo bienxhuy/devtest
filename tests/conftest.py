@@ -1,6 +1,5 @@
 import pytest
 from selenium import webdriver
-from models.TestContext import context
 
 
 # This is a pytest fixture that initializes a driver instance for testing
@@ -16,12 +15,3 @@ def driver():
     driver.maximize_window()
     yield driver
     driver.quit()
-
-
-# This hook pre-sets the test suite and test case in the TestContext
-# This run before each test case
-@pytest.hookimpl(tryfirst=True, hookwrapper=True)
-def pytest_runtest_call(item):
-    context.test_suite = item.module.__name__
-    context.test_case = item.name
-    yield
