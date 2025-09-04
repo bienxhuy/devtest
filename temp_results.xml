@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="3" time="0.205" timestamp="2025-09-03T17:13:57.667624" hostname="phnhung-batch48-lap"><testcase classname="tests.test_UI.test_home_page" name="test_equal_fail" time="0.000"><failure message="AssertionError: This is expected to be failed!&#10;assert 10 == 5">def test_equal_fail():
+&gt;       assert 10 == 5, "This is expected to be failed!"
+E       AssertionError: This is expected to be failed!
+E       assert 10 == 5
+
+tests\test_UI\test_home_page.py:143: AssertionError</failure></testcase><testcase classname="tests.test_UI.test_home_page" name="test_string_fail" time="0.000"><failure message="AssertionError: This is expected to be failed!&#10;assert 'bye' in 'hello world'">def test_string_fail():
+&gt;       assert "bye" in "hello world", "This is expected to be failed!"
+E       AssertionError: This is expected to be failed!
+E       assert 'bye' in 'hello world'
+
+tests\test_UI\test_home_page.py:151: AssertionError</failure></testcase><testcase classname="tests.test_UI.test_home_page" name="test_random_even" time="0.000" /></testsuite></testsuites>
