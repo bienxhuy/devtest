@@ -152,11 +152,5 @@ def test_string_fail():
     assert "bye" in "hello world", "This is expected to be failed!"
 
 
-def test_sleep_pass():
-    time.sleep(10)
-    assert True
-    
-
-def test_sleep_fail():
-    time.sleep(10)
-    assert False, "This is expected to be failed!"
+def test_flaky():
+    assert time.time() % 2 < 1, "This is expected to be failed sometimes!"
