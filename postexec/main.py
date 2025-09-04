@@ -36,7 +36,7 @@ def format_summary_to_line_protocol(data: dict) -> str:
 
 
 if __name__ == "__main__":
-    postexec = PostExec(JUNIT_PATH)
+    postexec = PostExec(path=JUNIT_PATH, temp="./postexec/temp")
     postexec.retry_fails()
     summ = postexec.summary()
     print(postexec.send_records(
