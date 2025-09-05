@@ -133,24 +133,29 @@
 #         # Log the test result
 #         # log_test_result(testField)
 
-import time
+# import time
 
 
-def test_equal_pass():
-    assert 10 == 10
+# def test_equal_pass():
+#     assert 10 == 10
     
     
-def test_equal_fail():
-    assert 10 == 5, "This is expected to be failed!"    
+# def test_equal_fail():
+#     assert 10 == 5, "This is expected to be failed!"    
 
 
-def test_string_pass():
-    assert "hello" in "hello world"
+# def test_string_pass():
+#     assert "hello" in "hello world"
 
     
-def test_string_fail():
-    assert "bye" in "hello world", "This is expected to be failed!"
+# def test_string_fail():
+#     assert "bye" in "hello world", "This is expected to be failed!"
 
 
-def test_flaky():
-    assert time.time() % 2 < 1, "This is expected to be failed sometimes!"
+# def test_flaky():
+#     assert time.time() % 2 < 1, "This is expected to be failed sometimes!"
+    
+
+def test_driver(driver):
+    driver.get("https://google.com")
+    assert driver.title == "Google"
