@@ -13,14 +13,7 @@ RUN_TABLE = "build_summaries"
 
 
 def format_summary_to_line_protocol(data: dict) -> str:
-    """Format a dictionary to InfluxDB line protocol.
-
-    Args:
-        data (dict): The dictionary to format.
-
-    Returns:
-        str: The formatted line protocol string.
-    """
+    """Format summary to InfluxDB line protocol."""
     tags = f"run_id={data['run_id']},host_name={data['host_name']}"
     fields = (
         f"total={data['total']},"
