@@ -4,3 +4,4 @@ selenium==4.21.0
 webdriver_manager==4.0.1
 pytest-xdist==3.6.1
 junitparser==4.0.2
+requests==2.32.4
