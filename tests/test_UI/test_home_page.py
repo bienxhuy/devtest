@@ -20,6 +20,7 @@ BASE_URL = os.getenv('BASE_URL')
 def test_click_header(driver):    
     # Initialize the HomePage object & navigate to the base URL
     page = HomePage(driver=driver)
+    print(BASE_URL)
     driver.get(BASE_URL)
     
     try:
