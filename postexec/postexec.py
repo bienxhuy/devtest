@@ -125,9 +125,10 @@ class PostExec():
         # Because of pytest, there's only 1 suite
         for suite in xml:
             # Extract information of that suite
-            timestamp = int(datetime.fromisoformat(suite.timestamp) \
-                                .replace(tzinfo=timezone(timedelta(hours=7))) \
-                                .timestamp() * 1000000)
+            # timestamp = int(datetime.fromisoformat(suite.timestamp) \
+            #                     .replace(tzinfo=timezone(timedelta(hours=7))) \
+            #                     .timestamp() * 1000000)
+            timestamp = int(datetime.fromisoformat(suite.timestamp).timestamp() * 1000000)
             host_name = suite.hostname
             test_execution_time = suite.time or 0
 
