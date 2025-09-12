@@ -33,32 +33,32 @@ def test_click_header(driver):
 
 
 # This function tests the Start Learning button click functionality
-# @pytest.mark.smoke
-# def test_click_start_button(driver):
-#     # Initialize the HomePage object & navigate to the base URL
-#     page = HomePage(driver=driver)
-#     driver.get(BASE_URL)
+@pytest.mark.smoke
+def test_click_start_button(driver):
+    # Initialize the HomePage object & navigate to the base URL
+    page = HomePage(driver=driver)
+    driver.get(BASE_URL)
     
-#     try:
-#         # Click the Start Learning button and check the notification
-#         result = page.click_start_learning()
-#         assert result == Noti.START_BUTTON_CLICKED_SUCCESS, result
-#     except AssertionError as e:
-#         take_screenshot(driver, "start_button_click_error")
-#         raise e
+    try:
+        # Click the Start Learning button and check the notification
+        result = page.click_start_learning()
+        assert result == Noti.START_BUTTON_CLICKED_SUCCESS, result
+    except AssertionError as e:
+        take_screenshot(driver, "start_button_click_error")
+        raise e
 
 
-# # This function tests the Enroll Course button click functionality
-# @pytest.mark.smoke
-# def test_click_enroll_button(driver):
-#     # Initialize the HomePage object & navigate to the base URL
-#     page = HomePage(driver=driver)
-#     driver.get(BASE_URL)
+# This function tests the Enroll Course button click functionality
+@pytest.mark.smoke
+def test_click_enroll_button(driver):
+    # Initialize the HomePage object & navigate to the base URL
+    page = HomePage(driver=driver)
+    driver.get(BASE_URL)
     
-#     try:
-#         # Click the Enroll Course button and check the notification
-#         result = page.click_enroll_button()
-#         assert result == Noti.ENROLL_BUTTON_CLICKED_SUCCESS, result
-#     except AssertionError as e:
-#         take_screenshot(driver, "enroll_button_click_error")
-#         raise e
+    try:
+        # Click the Enroll Course button and check the notification
+        result = page.click_enroll_button()
+        assert result == Noti.ENROLL_BUTTON_CLICKED_SUCCESS, result
+    except AssertionError as e:
+        take_screenshot(driver, "enroll_button_click_error")
+        raise e
