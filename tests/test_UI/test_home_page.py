@@ -62,3 +62,7 @@ def test_click_enroll_button(driver):
     except AssertionError as e:
         take_screenshot(driver, "enroll_button_click_error")
         raise e
+
+def test_env():
+    """Test to ensure that the BASE_URL environment variable is set."""
+    assert BASE_URL is not None, "BASE_URL environment variable is not set."
