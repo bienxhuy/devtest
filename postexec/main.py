@@ -33,7 +33,7 @@ def format_summary_to_line_protocol(data: dict) -> str:
         f"failed={data['failed']},"
         f"skipped={data['skipped']},"
         f"unstable={data['unstable']},"
-        f"pass_rate={data['passed'] / data['total'] if data['total'] > 0 else 0},"
+        f"pass_rate={data['passed'] * 100 / data['total'] if data['total'] > 0 else 0},"
         f"execution_time={data['execution_time']},"
         f"mean_test_duration={data['mean_test_duration']}"
     )
