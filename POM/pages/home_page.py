@@ -1,6 +1,12 @@
 from POM.notifications.home_page_notifications import HomePageNotifications as Noti
 from POM.pages.base_page import BasePage
 from POM.locators.home_page_locators import HomePageLocators as el  
+from logs.logger import get_logger
+
+
+# Get a logger instance for logging within the page objects
+logger = get_logger()
+
 
 class HomePage(BasePage):
     def __init__(self, driver):
@@ -8,6 +14,7 @@ class HomePage(BasePage):
 
     # Header clicks 
     def click_home_header(self):
+        logger.info("Attempting to click the Home Header.")        
         return self.safe_click(
             el.HOME_HEADER,
             element="Home Header",
@@ -16,6 +23,7 @@ class HomePage(BasePage):
 
     # Hero button clicks
     def click_start_learning(self):
+        logger.info("Attempting to click the Start Learning button.")
         return self.safe_click(
             el.START_LEARNING_BUTTON,
             element="Start Learning button",
@@ -24,6 +32,7 @@ class HomePage(BasePage):
     
     # Click Enroll Course button
     def click_enroll_button(self):
+        logger.info("Attempting to click the Enroll Course button.")
         return self.safe_click(
             el.ENROLL_COURSE_BUTTON,
             element="Enroll Selenium Button",

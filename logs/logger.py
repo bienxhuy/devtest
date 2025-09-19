@@ -25,10 +25,17 @@ def get_logger(name=__name__):
 
     # Check if the logger already has handlers to avoid duplicate logs
     if not logger.handlers:
-        # Add file handler and formatter
+        # Add file handler for archiving logs in case of failures
         formatter = logging.Formatter("%(asctime)s [%(levelname)s] %(message)s")
         file_handler = logging.FileHandler(LOG_FILE)
         file_handler.setFormatter(formatter)
+        file_handler.setLevel(logging.DEBUG)
         logger.addHandler(file_handler)
+        
+        # Add console handler for real-time logging
+        console_handler = logging.StreamHandler()
+        console_handler.setFormatter(formatter)
+        console_handler.setLevel(logging.INFO)
+        logger.addHandler(console_handler)
 
     return logger

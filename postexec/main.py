@@ -1,8 +1,10 @@
 from postexec import PostExec
 from dotenv import load_dotenv
 import os
+from logs.logger import get_logger
 
-
+# Get a logger instance for logging within the postexec
+logger = get_logger()
 # Load configuration
 load_dotenv()
 JUNIT_PATH = os.getenv("JUNIT_PATH", "./postexec/junit.xml")
@@ -42,12 +44,18 @@ def format_summary_to_line_protocol(data: dict) -> str:
 
 
 if __name__ == "__main__":
+    logger.info("Starting post-execution processing.")
     postexec = PostExec(path=JUNIT_PATH, temp="./postexec/temp.xml")
+    logger.info(f"Starting retry of failed tests from {JUNIT_PATH}.")
     postexec.retry_fails()
+    logger.info("Retry completed. Generating summary.")
     summ = postexec.summary()
-    print(postexec.send_records(
+    logger.info(f"Summary generated: {summ}")
+    logger.info("Sending summary to InfluxDB.")
+    result = postexec.send_records(
         records=[format_summary_to_line_protocol(summ)],
         host=INFLUX_HOST,
         token=INFLUX_TOKEN,
         database=INFLUX_DATABASE
-    ))
+    )
+    logger.info(f"InfluxDB response: {result.status_code} - {result.text}")

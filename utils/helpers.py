@@ -1,6 +1,7 @@
 from datetime import datetime
 from dotenv import load_dotenv
 import os
+from logs.logger import get_logger
 
 
 # Create a directory for screenshots if it doesn't exist
@@ -11,6 +12,8 @@ SCREENSHOT_DIR = os.path.join(
     BASE_SCREENSHOT_DIR, 
     os.getenv('SESSION_ID', 'none_specified_session'))
 os.makedirs(SCREENSHOT_DIR, exist_ok=True)
+# Get a logger instance for logging within the helpers
+logger = get_logger()
 
 
 def take_screenshot(driver, name="error"):
@@ -20,6 +23,8 @@ def take_screenshot(driver, name="error"):
     
     try:
         driver.save_screenshot(filepath)
+        logger.info(f"Screenshot saved to {filepath} for {name}")
         return filepath
     except Exception as e:
-        return f"Failed to take screenshot: {e}"
+        logger.error(f"Failed to take screenshot: {e}")
+        return f"Failed to take screenshot for {name}"
