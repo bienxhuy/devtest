@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BASE_LOG_DIR = os.getenv('LOG_DIR', 'logs/logs_data')
-LOG_DIR = os.path.join(BASE_LOG_DIR, os.getenv('SESSION_ID', 'none_specified_session'))
+LOG_DIR = os.path.join(BASE_LOG_DIR, os.getenv('BUILD_NUMBER', 'none_specified_session'))
 os.makedirs(LOG_DIR, exist_ok=True)
 
 # Create a unique log file name based on worker ID (xdist)
