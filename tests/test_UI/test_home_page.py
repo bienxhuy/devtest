@@ -25,7 +25,11 @@ def test_click_header(driver):
     logger.info(f"Start test: test_click_header with BASE_URL={BASE_URL}")
     logger.info(f"Initializing HomePage object.")
     page = HomePage(driver=driver)
-    driver.get(BASE_URL)
+    try:
+        driver.get(BASE_URL)
+    except AssertionError as e:
+        logger.error(f"Error navigating to {BASE_URL}")
+        raise f"Error while navigating to {BASE_URL}"
     logger.info(f"Navigated to {BASE_URL}.")
     
     try:
@@ -47,7 +51,11 @@ def test_click_start_button(driver):
     logger.info(f"Start test: test_click_start_button with BASE_URL={BASE_URL}")
     logger.info(f"Initializing HomePage object.")
     page = HomePage(driver=driver)
-    driver.get(BASE_URL)
+    try:
+        driver.get(BASE_URL)
+    except AssertionError as e:
+        logger.error(f"Error navigating to {BASE_URL}")
+        raise f"Error while navigating to {BASE_URL}"
     logger.info(f"Navigated to {BASE_URL}.")
     
     try:
@@ -69,7 +77,11 @@ def test_click_enroll_button(driver):
     logger.info(f"Start test: test_click_enroll_button with BASE_URL={BASE_URL}")
     logger.info(f"Initializing HomePage object.")
     page = HomePage(driver=driver)
-    driver.get(BASE_URL)
+    try:
+        driver.get(BASE_URL)
+    except AssertionError as e:
+        logger.error(f"Error navigating to {BASE_URL}")
+        raise f"Error while navigating to {BASE_URL}"
     logger.info(f"Navigated to {BASE_URL}.")
     
     try:
