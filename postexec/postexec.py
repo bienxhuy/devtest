@@ -36,40 +36,40 @@ class PostExec():
         """
         # Initilize xml object from own path or injected path
         if xml_path is not None:
-            logger.info(f"Loading JUnit XML from {xml_path}.")
+            logger.info(f"[POST EXECUTION] - Loading JUnit XML from {xml_path}.")
             xml = JUnitXml.fromfile(xml_path)
         else:
-            logger.info(f"Loading JUnit XML from {self.xml_path}.")
+            logger.info(f"[POST EXECUTION] - Loading JUnit XML from {self.xml_path}.")
             xml = JUnitXml.fromfile(self.xml_path)
         if not xml: 
-            logger.warning("No JUnit XML found, skipping retry of failed tests.")
+            logger.info(f"[POST EXECUTION] - No JUnit XML found, skipping retry of failed tests.")
             return
-        logger.info("JUnit XML loaded successfully.")
+        logger.info(f"[POST EXECUTION] - JUnit XML loaded successfully.")
         
         # Get failed tests from original run
-        logger.info("Extracting failed tests from JUnit XML.")
+        logger.info(f"[POST EXECUTION] - Extracting failed tests from JUnit XML.")
         failed_tests = self._get_failed_tests(xml)
         if not failed_tests: 
-            logger.warning("No failed tests found, skipping retry.")
+            logger.info(f"[POST EXECUTION] - No failed tests found, skipping retry.")
             return
-        logger.info(f"Found {len(failed_tests)} failed tests to retry.")
+        logger.info(f"[POST EXECUTION] - Found {len(failed_tests)} failed tests to retry.")
 
         # Re-runs failed tests
-        logger.info(f"Starting retry of failed tests for {MAX_RETRIES} times.")
+        logger.info(f"[POST EXECUTION] - Starting retry of failed tests for {MAX_RETRIES} times.")
         for attempt in range(1, MAX_RETRIES + 1):
             # Run previous failed results
-            logger.info(f"=== Attempt {attempt} ===")
+            logger.info(f"[POST EXECUTION] - === Attempt {attempt} ===")
             self._run_tests([test["test_path"] for test in failed_tests])
-            logger.info("Retry run completed.")
+            logger.info(f"[POST EXECUTION] - Retry run completed.")
 
             # Load new failed results
-            logger.info("Loading results of retried tests.")
+            logger.info(f"[POST EXECUTION] - Loading results of retried tests.")
             temp_xml = JUnitXml.fromfile(self.temp_xml_path)
             new_failed = self._get_failed_tests(temp_xml)
-            logger.info(f"Remaining {len(new_failed)} failed tests after retry.")
+            logger.info(f"[POST EXECUTION] - Remaining {len(new_failed)} failed tests after retry.")
 
             # Compare with previous failed results to recognize unstable tests
-            logger.info("Comparing failed tests to identify unstable tests.")
+            logger.info(f"[POST EXECUTION] - Comparing failed tests to identify unstable tests.")
             # First create the list of test paths from new failed results
             new_test_paths = [test["test_path"] for test in new_failed]
             # Loop through old failed tests
@@ -79,16 +79,16 @@ class PostExec():
                     # It means it passed this time,
                     # mark as unstable
                     test["case"].append(Unstable())
-                    logger.info(f"Test {test['test_path']} marked as unstable.")
-            logger.info("Unstable test marking completed.")
+                    logger.info(f"[POST EXECUTION] - Test {test['test_path']} marked as unstable.")
+            logger.info(f"[POST EXECUTION] - Unstable test marking completed.")
 
             # Update failed_tests for next iteration
-            logger.info("Rewriting the JUnit XML file.")
+            logger.info(f"[POST EXECUTION] - Rewriting the JUnit XML file.")
             xml.write(self.xml_path)
-            logger.info(f"JUnit XML file updated.")
-            logger.info("Preparing for next retry iteration.")
+            logger.info(f"[POST EXECUTION] - JUnit XML file updated.")
+            logger.info(f"[POST EXECUTION] - Preparing for next retry iteration.")
             failed_tests = [t for t in failed_tests if t["case"].child(Unstable) is None]   
-            logger.info(f"{len(failed_tests)} tests remain failed for next retry.")
+            logger.info(f"[POST EXECUTION] - {len(failed_tests)} tests remain failed for next retry.")
 
     def _get_failed_tests(self, xml: JUnitXml) -> list[dict[str, TestCase]]:
         """Get a list of failed tests from the JUnit XML.
@@ -118,9 +118,9 @@ class PostExec():
             failed_tests_paths (list[str]): Paths to the failed test cases.
         """
         if not failed_tests_paths:
-            logger.warning("No failed tests to rerun.")
+            logger.info(f"[POST EXECUTION] - No failed tests to rerun.")
             return
-        logger.info(f"Rerunning {len(failed_tests_paths)} failed tests.")
+        logger.info(f"[POST EXECUTION] - Rerunning {len(failed_tests_paths)} failed tests.")
         cmd = ["pytest", "-v", f"--junitxml={self.temp_xml_path}"] + failed_tests_paths
         subprocess.run(cmd)
 
@@ -135,15 +135,15 @@ class PostExec():
             dict: Summary of test results.
         """
         if xml_path is not None:
-            logger.info(f"Loading JUnit XML file from {xml_path}.")
+            logger.info(f"[POST EXECUTION] - Loading JUnit XML file from {xml_path}.")
             xml = JUnitXml.fromfile(xml_path)
         else:
-            logger.info(f"Loading JUnit XML file from {self.xml_path}.")
+            logger.info(f"[POST EXECUTION] - Loading JUnit XML file from {self.xml_path}.")
             xml = JUnitXml.fromfile(self.xml_path)
-        logger.info("JUnit XML loaded successfully.")
+        logger.info(f"[POST EXECUTION] - JUnit XML loaded successfully.")
         if not xml: return {}
         
-        logger.info("Generating test summary.")
+        logger.info(f"[POST EXECUTION] - Generating test summary.")
         run_id = str(uuid4())
         summary = {"total": 0, "passed": 0, "failed": 0, "skipped": 0, "unstable": 0}
         test_execution_time = 0
@@ -182,7 +182,7 @@ class PostExec():
                 summary[status] += 1
                 total_test_time += case.time or 0
 
-        logger.info(f"Test summary: {summary}")
+        logger.info(f"[POST EXECUTION] - Test summary: {summary}")
         return {
             "run_id": run_id,
             "timestamp": timestamp,
@@ -206,10 +206,10 @@ class PostExec():
             database (str): InfluxDB database name
         """
         if not records:
-            logger.warning("No records to send to InfluxDB.")
+            logger.info(f"[POST EXECUTION] - No records to send to InfluxDB.")
             return
 
-        logger.info(f"Sending records to InfluxDB at {host}.")
+        logger.info(f"[POST EXECUTION] - Sending records to InfluxDB at {host}.")
         # Base URL to write & parameters
         url = f"{host}/api/v3/write_lp?"
         url += f"db={database}&precision=microsecond&accept_partial=true&no_sync=true"
@@ -223,7 +223,7 @@ class PostExec():
         # Send request & handle response
         response = requests.post(url, headers=headers, data=data)
         if response.status_code == 204:
-            logger.info("Records sent to InfluxDB successfully.")
+            logger.info(f"[POST EXECUTION] - Records sent to InfluxDB successfully.")
         else:
             logger.error(f"Failed to send records to InfluxDB: {response.status_code} - {response.text}")
         return response

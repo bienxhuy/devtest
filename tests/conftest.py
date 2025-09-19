@@ -11,7 +11,7 @@ logger = get_logger()
 # Provides a driver instance to the tests
 @pytest.fixture(scope="session")
 def driver():
-    logger.info("Initializing WebDriver instance for the test session.")
+    logger.info("[CONFTEST] - Initializing WebDriver instance for the test session.")
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")  # Required for Docker
@@ -19,7 +19,7 @@ def driver():
     options.add_argument("--disable-gpu")  # Disable GPU in headless mode
     driver = webdriver.Chrome(options=options)
     driver.maximize_window()
-    logger.info("WebDriver instance initialized successfully.")
+    logger.info("[CONFTEST] - WebDriver instance initialized successfully.")
     yield driver
-    logger.info("Quitting WebDriver instance after the test session.")
+    logger.info("[CONFTEST] - Quitting WebDriver instance after the test session.")
     driver.quit()

@@ -22,25 +22,25 @@ logger = get_logger()
 # This function tests the home page header click functionality
 @pytest.mark.smoke
 def test_click_header(driver):    
-    logger.info(f"Start test: test_click_header with BASE_URL={BASE_URL}")
-    logger.info(f"Initializing HomePage object.")
+    logger.info(f"[TEST] - Start test: test_click_header with BASE_URL={BASE_URL}")
+    logger.info(f"[TEST] - Initializing HomePage object.")
     page = HomePage(driver=driver)
     
     try:
         driver.get(BASE_URL)
     except WebDriverException as e:
-        logger.error(f"Error navigating to {BASE_URL}: {e.msg}")
+        logger.error(f"[TEST] - Error navigating to {BASE_URL}: {e.msg}")
         raise RuntimeError(f"Error while navigating to {BASE_URL}") from e
     
-    logger.info(f"Navigated to {BASE_URL}.")
+    logger.info(f"[TEST] - Navigated to {BASE_URL}.")
     
     try:
-        logger.info(f"Clicking the home header.")
+        logger.info(f"[TEST] - Clicking the home header.")
         result = page.click_home_header()
-        logger.info(f"Clicked the home header, received notification: {result}")
+        logger.info(f"[TEST] - Clicked the home header, received notification: {result}")
         assert result == Noti.HEADER_CLICKED_SUCCESS, result
     except AssertionError as e:
-        logger.error(f"AssertionError in test_click_header: {e}")
+        logger.error(f"[TEST] - AssertionError in test_click_header: {e}")
         take_screenshot(driver, "header_click_error")
         raise
 
@@ -48,25 +48,25 @@ def test_click_header(driver):
 # This function tests the Start Learning button click functionality
 @pytest.mark.smoke
 def test_click_start_button(driver):
-    logger.info(f"Start test: test_click_start_button with BASE_URL={BASE_URL}")
-    logger.info(f"Initializing HomePage object.")
+    logger.info(f"[TEST] - Start test: test_click_start_button with BASE_URL={BASE_URL}")
+    logger.info(f"[TEST] - Initializing HomePage object.")
     page = HomePage(driver=driver)
     
     try:
         driver.get(BASE_URL)
     except WebDriverException as e:
-        logger.error(f"Error navigating to {BASE_URL}: {e.msg}")
+        logger.error(f"[TEST] - Error navigating to {BASE_URL}: {e.msg}")
         raise RuntimeError(f"Error while navigating to {BASE_URL}") from e
     
-    logger.info(f"Navigated to {BASE_URL}.")
+    logger.info(f"[TEST] - Navigated to {BASE_URL}.")
     
     try:
-        logger.info(f"Clicking the Start Learning button.")
+        logger.info(f"[TEST] - Clicking the Start Learning button.")
         result = page.click_start_learning()
-        logger.info(f"Clicked the Start Learning button, received notification: {result}")
+        logger.info(f"[TEST] - Clicked the Start Learning button, received notification: {result}")
         assert result == Noti.START_BUTTON_CLICKED_SUCCESS, result
     except AssertionError as e:
-        logger.error(f"AssertionError in test_click_start_button: {e}")
+        logger.error(f"[TEST] - AssertionError in test_click_start_button: {e}")
         take_screenshot(driver, "start_button_click_error")
         raise
 
@@ -74,24 +74,24 @@ def test_click_start_button(driver):
 # This function tests the Enroll Course button click functionality
 @pytest.mark.smoke
 def test_click_enroll_button(driver):
-    logger.info(f"Start test: test_click_enroll_button with BASE_URL={BASE_URL}")
-    logger.info(f"Initializing HomePage object.")
+    logger.info(f"[TEST] - Start test: test_click_enroll_button with BASE_URL={BASE_URL}")
+    logger.info(f"[TEST] - Initializing HomePage object.")
     page = HomePage(driver=driver)
     
     try:
         driver.get(BASE_URL)
     except WebDriverException as e:
-        logger.error(f"Error navigating to {BASE_URL}: {e.msg}")
+        logger.error(f"[TEST] - Error navigating to {BASE_URL}: {e.msg}")
         raise RuntimeError(f"Error while navigating to {BASE_URL}") from e
     
-    logger.info(f"Navigated to {BASE_URL}.")
+    logger.info(f"[TEST] - Navigated to {BASE_URL}.")
     
     try:
-        logger.info(f"Clicking the Enroll Course button.")
+        logger.info(f"[TEST] - Clicking the Enroll Course button.")
         result = page.click_enroll_button()
-        logger.info(f"Clicked the Enroll Course button, received notification: {result}")
+        logger.info(f"[TEST] - Clicked the Enroll Course button, received notification: {result}")
         assert result == Noti.ENROLL_BUTTON_CLICKED_SUCCESS, result
     except AssertionError as e:
-        logger.error(f"AssertionError in test_click_enroll_button: {e}")
+        logger.error(f"[TEST] - AssertionError in test_click_enroll_button: {e}")
         take_screenshot(driver, "enroll_button_click_error")
         raise

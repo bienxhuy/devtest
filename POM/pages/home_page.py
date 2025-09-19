@@ -14,7 +14,7 @@ class HomePage(BasePage):
 
     # Header clicks 
     def click_home_header(self):
-        logger.info("Attempting to click the Home Header.")        
+        logger.info("[POM - HomePage] - Attempting to click the Home Header.")        
         return self.safe_click(
             el.HOME_HEADER,
             element="Home Header",
@@ -23,7 +23,7 @@ class HomePage(BasePage):
 
     # Hero button clicks
     def click_start_learning(self):
-        logger.info("Attempting to click the Start Learning button.")
+        logger.info("[POM - HomePage] - Attempting to click the Start Learning button.")
         return self.safe_click(
             el.START_LEARNING_BUTTON,
             element="Start Learning button",
@@ -32,7 +32,7 @@ class HomePage(BasePage):
     
     # Click Enroll Course button
     def click_enroll_button(self):
-        logger.info("Attempting to click the Enroll Course button.")
+        logger.info("[POM - HomePage] - Attempting to click the Enroll Course button.")
         return self.safe_click(
             el.ENROLL_COURSE_BUTTON,
             element="Enroll Selenium Button",

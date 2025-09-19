@@ -23,8 +23,8 @@ def take_screenshot(driver, name="error"):
     
     try:
         driver.save_screenshot(filepath)
-        logger.info(f"Screenshot saved to {filepath} for {name}")
+        logger.info(f"[SCREENSHOT] - Screenshot saved to {filepath} for {name}")
         return filepath
     except Exception as e:
-        logger.error(f"Failed to take screenshot: {e}")
+        logger.error(f"[SCREENSHOT] - Failed to take screenshot: {e}")
         return f"Failed to take screenshot for {name}"

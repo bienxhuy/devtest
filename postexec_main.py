@@ -44,18 +44,18 @@ def format_summary_to_line_protocol(data: dict) -> str:
 
 
 if __name__ == "__main__":
-    logger.info("Starting post-execution processing.")
+    logger.info("[POST EXECUTION] - Starting post-execution processing.")
     postexec = PostExec(path=JUNIT_PATH, temp="./postexec/temp.xml")
-    logger.info(f"Starting retry of failed tests from {JUNIT_PATH}.")
+    logger.info(f"[POST EXECUTION] - Starting retry of failed tests from {JUNIT_PATH}.")
     postexec.retry_fails()
-    logger.info("Retry completed. Generating summary.")
+    logger.info("[POST EXECUTION] - Retry completed. Generating summary.")
     summ = postexec.summary()
-    logger.info(f"Summary generated: {summ}")
-    logger.info("Sending summary to InfluxDB.")
+    logger.info(f"[POST EXECUTION] - Summary generated: {summ}")
+    logger.info("[POST EXECUTION] - Sending summary to InfluxDB.")
     result = postexec.send_records(
         records=[format_summary_to_line_protocol(summ)],
         host=INFLUX_HOST,
         token=INFLUX_TOKEN,
         database=INFLUX_DATABASE
     )
-    logger.info(f"InfluxDB response: {result.status_code} - {result.text}")
+    logger.info(f"[POST EXECUTION] - InfluxDB response: {result.status_code} - {result.text}")
