@@ -27,6 +27,10 @@ class PostExec():
         self.context = context
         self.xml_path = path
         self.temp_xml_path = temp
+        
+    def get_xml_junit_object(self) -> JUnitXml:
+        """Get xml JUnitXml object from instance's xml_path"""
+        return JUnitXml.fromfile(self.xml_path)
 
     def retry_fails(self, xml_path: str = None) -> None:
         """Retry failed tests.
@@ -48,7 +52,7 @@ class PostExec():
         
         # Get failed tests from original run
         logger.info(f"[POST EXECUTION] - Extracting failed tests from JUnit XML.")
-        failed_tests = self._get_failed_tests(xml)
+        failed_tests = self.get_failed_tests(xml)
         if not failed_tests: 
             logger.info(f"[POST EXECUTION] - No failed tests found, skipping retry.")
             return
@@ -65,7 +69,7 @@ class PostExec():
             # Load new failed results
             logger.info(f"[POST EXECUTION] - Loading results of retried tests.")
             temp_xml = JUnitXml.fromfile(self.temp_xml_path)
-            new_failed = self._get_failed_tests(temp_xml)
+            new_failed = self.get_failed_tests(temp_xml)
             logger.info(f"[POST EXECUTION] - Remaining {len(new_failed)} failed tests after retry.")
 
             # Compare with previous failed results to recognize unstable tests
@@ -90,7 +94,7 @@ class PostExec():
             failed_tests = [t for t in failed_tests if t["case"].child(Unstable) is None]   
             logger.info(f"[POST EXECUTION] - {len(failed_tests)} tests remain failed for next retry.")
 
-    def _get_failed_tests(self, xml: JUnitXml) -> list[dict[str, TestCase]]:
+    def get_failed_tests(self, xml: JUnitXml) -> list[dict[str, TestCase]]:
         """Get a list of failed tests from the JUnit XML.
 
         Args:
