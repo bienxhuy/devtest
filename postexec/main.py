@@ -11,8 +11,10 @@ INFLUX_TOKEN = os.getenv("INFLUX_TOKEN")
 INFLUX_DATABASE = os.getenv("INFLUX_DATABASE")
 RUN_TABLE = "build_summaries"
 BUILD_NUMBER = os.getenv("BUILD_NUMBER", "local_run")
-BUILD_URL = os.getenv("BUILD_URL", "http://localhost:8080/devtest")
+BUILD_URL = os.getenv("BUILD_URL", "http://localhost:8080/job/devtest")
 BRANCH = os.getenv("BRANCH", "local_branch")
+AUTHOR = os.getenv("AUTHOR", "local_author")
+HOST = os.getenv("HOST", "local_host")
 
 
 def format_summary_to_line_protocol(data: dict) -> str:
@@ -22,7 +24,9 @@ def format_summary_to_line_protocol(data: dict) -> str:
         f"build_url={BUILD_URL},"
         f"run_id={data['run_id']},"
         f"branch={BRANCH},"
-        f"host_name={data['host_name']}")
+        f"author={AUTHOR},"
+        f"host={HOST}"
+    )
     fields = (
         f"total={data['total']},"
         f"passed={data['passed']},"

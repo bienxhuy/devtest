@@ -129,7 +129,6 @@ class PostExec():
             #                     .replace(tzinfo=timezone(timedelta(hours=7))) \
             #                     .timestamp() * 1000000)
             timestamp = int(datetime.fromisoformat(suite.timestamp).timestamp() * 1000000)
-            host_name = suite.hostname
             test_execution_time = suite.time or 0
 
             # Because of pytest, there's only 1 suite
@@ -166,7 +165,6 @@ class PostExec():
             "execution_time": test_execution_time,
             "mean_test_duration": 
                 total_test_time / summary["total"] if summary["total"] > 0 else 0,
-            "host_name": host_name
         }
     
     def send_records(self, records: str, host: str, token: str, database: str) -> None:
