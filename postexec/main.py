@@ -10,17 +10,26 @@ INFLUX_HOST = os.getenv("INFLUX_HOST")
 INFLUX_TOKEN = os.getenv("INFLUX_TOKEN")
 INFLUX_DATABASE = os.getenv("INFLUX_DATABASE")
 RUN_TABLE = "build_summaries"
+BUILD_NUMBER = os.getenv("BUILD_NUMBER", "local_run")
+BUILD_URL = os.getenv("BUILD_URL", "http://localhost:8080/devtest")
+BRANCH = os.getenv("BRANCH", "local_branch")
 
 
 def format_summary_to_line_protocol(data: dict) -> str:
     """Format summary to InfluxDB line protocol."""
-    tags = f"run_id={data['run_id']},host_name={data['host_name']}"
+    tags = (
+        f"build_number={BUILD_NUMBER},"
+        f"build_url={BUILD_URL},"
+        f"run_id={data['run_id']},"
+        f"branch={BRANCH},"
+        f"host_name={data['host_name']}")
     fields = (
         f"total={data['total']},"
         f"passed={data['passed']},"
         f"failed={data['failed']},"
         f"skipped={data['skipped']},"
         f"unstable={data['unstable']},"
+        f"pass_rate={data['passed'] / data['total'] if data['total'] > 0 else 0},"
         f"execution_time={data['execution_time']},"
         f"mean_test_duration={data['mean_test_duration']}"
     )
