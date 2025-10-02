@@ -34,7 +34,7 @@ def navigate_home(driver):
 
 @pytest.mark.smoke
 def test_click_header(navigate_home):
-    logger.info("[TEST] test_click_header")
+    logger.info("[TEST] test_click_header starts")
     result = navigate_home.click_home_header()
     assert result == Noti.HEADER_CLICKED_SUCCESS
     logger.info("[TEST] Header click successful.")
@@ -42,7 +42,7 @@ def test_click_header(navigate_home):
 
 @pytest.mark.smoke
 def test_click_start_button(navigate_home):
-    logger.info("[TEST] test_click_start_button")
+    logger.info("[TEST] test_click_start_button starts")
     result = navigate_home.click_start_learning()
     assert result == Noti.START_BUTTON_CLICKED_SUCCESS
     logger.info("[TEST] Start button click successful.")
@@ -50,7 +50,7 @@ def test_click_start_button(navigate_home):
 
 @pytest.mark.smoke
 def test_click_enroll_button(navigate_home):
-    logger.info("[TEST] test_click_enroll_button")
+    logger.info("[TEST] test_click_enroll_button starts")
     result = navigate_home.click_enroll_button()
     assert result == Noti.ENROLL_BUTTON_CLICKED_SUCCESS
     logger.info("[TEST] Enroll button click successful.")
