@@ -19,7 +19,7 @@ LOG_FILE = os.path.join(LOG_DIR, f"{WORKER_ID}.log")
 # Get a logger instance, creating it if it doesn't exist
 # This function caches the logger instances to
 # avoid creating multiple instances with the same name
-def get_logger(name=__name__):
+def get_logger(name=__name__, console_log=False):
     logger = logging.getLogger(name)
     logger.setLevel(logging.INFO)
 
@@ -33,9 +33,10 @@ def get_logger(name=__name__):
         logger.addHandler(file_handler)
         
         # Add console handler for real-time logging
-        console_handler = logging.StreamHandler()
-        console_handler.setFormatter(formatter)
-        console_handler.setLevel(logging.INFO)
-        logger.addHandler(console_handler)
+        if console_log:
+            console_handler = logging.StreamHandler()
+            console_handler.setFormatter(formatter)
+            console_handler.setLevel(logging.INFO)
+            logger.addHandler(console_handler)
 
     return logger
