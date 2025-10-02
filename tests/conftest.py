@@ -19,7 +19,7 @@ def driver():
     options.add_argument("--disable-dev-shm-usage")  # Avoids issues with shared memory in Docker
     options.add_argument("--disable-gpu")  # Disable GPU in headless mode
     driver = webdriver.Chrome(options=options)
-    # driver.maximize_window()
+    driver.maximize_window()
     yield driver
     logger.info("[CONFTEST] - Quitting WebDriver instance after the test session.")
     driver.quit()
@@ -35,6 +35,7 @@ def pytest_runtest_makereport(item, call):
 
 @pytest.fixture(autouse=True)
 def screenshot_on_fail(request, driver):
+    """Screenshot the screen of app when test fail"""
     yield
     if hasattr(request.node, "rep_call") and request.node.rep_call.failed:
         take_screenshot(driver, f"{request.node.name}_error")
