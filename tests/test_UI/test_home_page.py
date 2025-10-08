@@ -54,3 +54,6 @@ def test_click_enroll_button(navigate_home):
     result = navigate_home.click_enroll_button()
     assert result == Noti.ENROLL_BUTTON_CLICKED_SUCCESS
     logger.info("[TEST] Enroll button click successful.")
+
+def test_fail_expected():
+    assert False, "This test is designed to fail."

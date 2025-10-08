@@ -19,7 +19,7 @@ def driver():
     options.add_argument("--disable-dev-shm-usage")  # Avoids issues with shared memory in Docker
     options.add_argument("--disable-gpu")  # Disable GPU in headless mode
     driver = webdriver.Chrome(options=options)
-    # driver.maximize_window()
+    driver.maximize_window()
     yield driver
     logger.info("[CONFTEST] - Quitting WebDriver instance after the test session.")
     driver.quit()
