@@ -57,3 +57,15 @@ def test_click_enroll_button(navigate_home):
 
 def test_fail_expected():
     assert False, "This test is designed to fail."
+    
+def test_success_one():
+    assert True
+    
+def test_success_two():
+    assert 1 + 1 == 2
+
+def test_success_three():
+    assert "hello".upper() == "HELLO"
+    
+def test_fail_expected_two():
+    assert 1 == 0, "This test is designed to fail."
