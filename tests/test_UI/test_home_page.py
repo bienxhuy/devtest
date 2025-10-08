@@ -66,6 +66,3 @@ def test_success_two():
 
 def test_success_three():
     assert "hello".upper() == "HELLO"
-    
-def test_fail_expected_two():
-    assert 1 == 0, "This test is designed to fail."
