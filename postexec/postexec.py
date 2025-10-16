@@ -203,7 +203,7 @@ class PostExec():
                 total_test_time / summary["total"] if summary["total"] > 0 else 0,
         }
     
-    def send_records(self, records: str, host: str, token: str, database: str) -> None:
+    def send_records(self, records: list[str], host: str, token: str, database: str) -> None:
         """Send records to InfluxDB.
 
         Args:
