@@ -91,7 +91,10 @@ class PostExec():
             xml.write(self.xml_path)
             logger.info(f"[POST EXECUTION] - JUnit XML file updated.")
             logger.info(f"[POST EXECUTION] - Preparing for next retry iteration.")
-            failed_tests = [t for t in failed_tests if t["case"].child(Unstable) is None]   
+            failed_tests = [t for t in failed_tests if t["case"].child(Unstable) is None]
+            if (len(failed_tests) == 0):
+                logger.info(f"[POST EXECUTION] - All tests passed or marked unstable, ending retries.")
+                break 
             logger.info(f"[POST EXECUTION] - {len(failed_tests)} tests remain failed for next retry.")
 
     def get_failed_tests(self, xml: JUnitXml) -> list[dict[str, TestCase]]:
