@@ -70,9 +70,9 @@ if __name__ == "__main__":
     logger.info("[POST EXECUTION] - Starting post-execution processing.")
     postexec = PostExec(path=JUNIT_PATH, temp="./postexec/temp.xml")
     
-    # # Retry failed test cases
-    # logger.info(f"[POST EXECUTION] - Starting retry of failed tests from {JUNIT_PATH}.")
-    # postexec.retry_fails()
+    # Retry failed test cases
+    logger.info(f"[POST EXECUTION] - Starting retry of failed tests from {JUNIT_PATH}.")
+    postexec.retry_fails()
     
     logger.info("[POST EXECUTION] - Retry completed. Generating summary.")
     summ = postexec.summary()
