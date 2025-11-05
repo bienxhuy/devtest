@@ -205,3 +205,18 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Report file of pytest
+report/
+report.html
+
+# Screenshots
+utils/screenshots/
+
+# Logs
+logs/logs_data
+
+# Test result
+junit_results.xml
+junit.xml
+temp*.xml
