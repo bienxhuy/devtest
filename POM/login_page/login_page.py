@@ -5,6 +5,7 @@ from POM.base_page import BasePage
 class LoginPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
+        self.go_to_url(self.BASE_URL + "/login")
     
     # Login action - returns notification message
     def login(self, email, password):

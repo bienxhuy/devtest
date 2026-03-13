@@ -6,6 +6,7 @@ from POM.home_page.home_page_locators import HomePageLocators as el
 class HomePage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
+        self.go_to_url(self.BASE_URL)
 
     # Click home action button
     def click_home_action_button(self):
