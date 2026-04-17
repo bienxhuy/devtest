@@ -20,3 +20,8 @@ class Login_PageLocators:
     
     # Back to home button
     BACK_TO_HOME_BUTTON = "//*[@id=\"login-back-home-button\"]"
+    
+    # Error message 
+    LOGIN_ERROR_MESSAGE = "//*[@id=\"login-error-message\"]"
+    REGISTER_ERROR_MESSAGE = "//*[@id=\"register-error-message\"]"
+    
