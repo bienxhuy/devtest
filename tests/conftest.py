@@ -10,7 +10,7 @@ logger = get_logger()
 
 # This is a pytest fixture that initializes a driver instance for testing
 # Provides a driver instance to the tests
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def driver():
     logger.info("[CONFTEST] - Initialize WebDriver instance for the test session.")
     options = webdriver.ChromeOptions()
@@ -25,6 +25,7 @@ def driver():
     driver.quit()
     
 
+# Fixtures for take screenshot on failure
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
     # execute all other hooks to obtain the report object
