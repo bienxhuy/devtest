@@ -211,10 +211,10 @@ report/
 report.html
 
 # Screenshots
-utils/screenshots/
+core/utils/screenshots
 
 # Logs
-logs/logs_data
+core/logs/logs_data
 
 # Test result
 junit_results.xml

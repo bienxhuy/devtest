@@ -1,8 +1,6 @@
 """ Test login usecase.
 """
-import pytest
-from logs.logger import get_logger
-from POM.login_page.login_page_notifications import LoginPageNotifications as LgNoti
+from core.logs.logger import get_logger
 
 
 # Get a logger instance for logging within the tests
@@ -22,28 +20,22 @@ class TestLogin:
 
     # Test auth - test login - 02
     # Verify Login failure with Incorrect Password
-    def test_login_with_invalid_password(self, login_page, regular_user_account):
+    def test_login_with_invalid_password(self, login_page, regular_user_account, invalid_password):
         """ Test login and verify user is logged in. """
         login_page.login(
             email=regular_user_account["email"],
-            password="wrong_password123"
+            password=invalid_password
         )
 
         assert not login_page.is_logged_in(), "Login verification failed: User is logged in"
 
-    # Class-level fixtures for security testing
-    @pytest.fixture(scope="function")
-    def sql_injection_payload(self):
-        """SQL injection payload for security testing."""
-        return "' OR 1=1 --"
-
     # Test auth - test login - 03
     # Verify Login page is secure against SQL Injection.
-    def test_sql_injection_protection(self, login_page, sql_injection_payload):
+    def test_sql_injection_protection(self, login_page, sql_injection_payload, sql_injection_password):
         """ Test login and verify user is logged in. """
         login_page.login(
             email=sql_injection_payload,
-            password="123456"
+            password=sql_injection_password
         )
 
         assert not login_page.is_logged_in(), "Login verification failed: User is logged in"

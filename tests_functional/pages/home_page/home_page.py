@@ -1,6 +1,6 @@
-from POM.home_page.home_page_notifications import HomePageNotifications as Noti
-from POM.base_page import BasePage
-from POM.home_page.home_page_locators import HomePageLocators as el
+from tests_functional.pages.home_page.home_page_notifications import HomePageNotifications as Noti
+from core.base_page import BasePage
+from tests_functional.pages.home_page.home_page_locators import HomePageLocators as el
 
 
 class HomePage(BasePage):

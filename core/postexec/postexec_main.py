@@ -1,7 +1,7 @@
-from postexec import PostExec, Unstable
+from core.postexec import PostExec, Unstable
 from dotenv import load_dotenv
 import os
-from logs.logger import get_logger
+from core.logs.logger import get_logger
 from junitparser import TestCase
 
 
@@ -9,7 +9,7 @@ from junitparser import TestCase
 logger = get_logger()
 # Load configuration
 load_dotenv()
-JUNIT_PATH = os.getenv("JUNIT_PATH", "./postexec/junit.xml")
+JUNIT_PATH = os.getenv("JUNIT_PATH", "./core/postexec/junit.xml")
 INFLUX_HOST = os.getenv("INFLUX_HOST")
 INFLUX_TOKEN = os.getenv("INFLUX_TOKEN")
 INFLUX_DATABASE = os.getenv("INFLUX_DATABASE")
@@ -68,7 +68,7 @@ def format_summary_to_line_protocol(data: dict) -> str:
 
 if __name__ == "__main__":
     logger.info("[POST EXECUTION] - Starting post-execution processing.")
-    postexec = PostExec(path=JUNIT_PATH, temp="./postexec/temp.xml")
+    postexec = PostExec(path=JUNIT_PATH, temp="./core/postexec/temp.xml")
     
     # Retry failed test cases
     logger.info(f"[POST EXECUTION] - Starting retry of failed tests from {JUNIT_PATH}.")

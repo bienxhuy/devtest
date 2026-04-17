@@ -1,0 +1,16 @@
+{
+  "accounts": {
+    "regular_user": {
+      "email": "bxh@gmail.com",
+      "password": "Huy123456",
+      "name": "Bien Xuan Huy"
+    }
+  },
+  "negative_cases": {
+    "invalid_password": "wrong_password123",
+    "sql_injection_password": "123456"
+  },
+  "security_payloads": {
+    "sql_injection": "' OR 1=1 --"
+  }
+}

@@ -1,13 +1,13 @@
 from datetime import datetime
 from dotenv import load_dotenv
 import os
-from logs.logger import get_logger
+from core.logs.logger import get_logger
 
 
 # Create a directory for screenshots if it doesn't exist
 # This is used to store screenshots taken a test session
 load_dotenv()
-BASE_SCREENSHOT_DIR = os.getenv('SCREENSHOT_DIR', 'utils/screenshots')
+BASE_SCREENSHOT_DIR = os.getenv('SCREENSHOT_DIR', 'core/utils/screenshots')
 SCREENSHOT_DIR = os.path.join(
     BASE_SCREENSHOT_DIR, 
     os.getenv('SESSION_ID', 'none_specified_session'))

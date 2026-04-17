@@ -2,7 +2,7 @@ from junitparser import JUnitXml, Element, Failure, Error, Skipped, TestCase
 from uuid import uuid4
 from datetime import datetime
 import requests, subprocess, os
-from logs.logger import get_logger
+from core.logs.logger import get_logger
 
 
 # Maximum time of retries failed tests.
