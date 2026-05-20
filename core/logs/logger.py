@@ -7,8 +7,10 @@ from dotenv import load_dotenv
 # This is used to store logs taken during a test session
 load_dotenv()
 
-BASE_LOG_DIR = os.getenv('LOG_DIR', 'core/logs/logs_data')
-LOG_DIR = os.path.join(BASE_LOG_DIR, os.getenv('BUILD_NUMBER', 'none_specified_session'))
+BASE_LOG_DIR = os.getenv('LOG_DIR', 'reports/logs')
+LOG_DIR = os.path.join(
+    BASE_LOG_DIR, 
+    os.getenv('BUILD_NUMBER', 'none_specified_session'))
 os.makedirs(LOG_DIR, exist_ok=True)
 
 # Create a unique log file name based on worker ID (xdist)

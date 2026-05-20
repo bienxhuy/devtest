@@ -5,13 +5,15 @@ from core.logs.logger import get_logger
 
 
 # Create a directory for screenshots if it doesn't exist
-# This is used to store screenshots taken a test session
+# This is used to store screenshots taken during a test session
 load_dotenv()
-BASE_SCREENSHOT_DIR = os.getenv('SCREENSHOT_DIR', 'core/utils/screenshots')
+
+BASE_SCREENSHOT_DIR = os.getenv('SCREENSHOT_DIR', 'reports/screenshots')
 SCREENSHOT_DIR = os.path.join(
     BASE_SCREENSHOT_DIR, 
-    os.getenv('SESSION_ID', 'none_specified_session'))
+    os.getenv('BUILD_NUMBER', 'none_specified_session'))
 os.makedirs(SCREENSHOT_DIR, exist_ok=True)
+
 # Get a logger instance for logging within the helpers
 logger = get_logger()
 
