@@ -220,3 +220,4 @@ core/logs/logs_data
 junit_results.xml
 junit.xml
 temp*.xml
+reports/
