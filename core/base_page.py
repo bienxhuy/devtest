@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
-from core.logs.logger import get_logger
+from core.utils.logs import get_logger
 from dotenv import load_dotenv
 import os
 

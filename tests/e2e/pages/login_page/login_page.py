@@ -1,5 +1,5 @@
-from tests_functional.pages.login_page.login_page_locators import Login_PageLocators as LgLocators
-from tests_functional.pages.login_page.login_page_notifications import LoginPageNotifications as LgNoti
+from tests.e2e.pages.login_page.login_page_locators import Login_PageLocators as LgLocators
+from tests.e2e.pages.login_page.login_page_notifications import LoginPageNotifications as LgNoti
 from core.base_page import BasePage
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
@@ -25,7 +25,7 @@ class LoginPage(BasePage):
         
     # Check if login was successful
     def is_logged_in(self):
-        from core.logs.logger import get_logger
+        from core.utils.logs import get_logger
         logger = get_logger()
         # In SPA flows, redirect can happen after click without a full page reload.
         try:

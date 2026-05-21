@@ -1,6 +1,6 @@
 """ Test login usecase.
 """
-from core.logs.logger import get_logger
+from core.utils.logs import get_logger
 
 
 # Get a logger instance for logging within the tests

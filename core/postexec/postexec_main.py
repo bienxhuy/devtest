@@ -1,7 +1,7 @@
 from core.postexec import PostExec, Unstable
 from dotenv import load_dotenv
 import os
-from core.logs.logger import get_logger
+from core.utils.logs import get_logger
 from junitparser import TestCase
 
 

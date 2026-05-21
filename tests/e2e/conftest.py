@@ -1,8 +1,8 @@
 import pytest
 
 from core.driver_factory import DriverFactory
-from core.logs.logger import get_logger
-from core.utils.helpers import take_screenshot
+from core.utils.logs import get_logger
+from core.utils.screenshot import take_screenshot
 
 
 logger = get_logger()
@@ -20,7 +20,7 @@ def driver():
 
 # Fixtures for taking screenshots on failure
 @pytest.hookimpl(hookwrapper=True)
-def pytest_runtest_makereport(item, call):
+def pytest_runtest_makereport(item, _):
     # Execute all other hooks first to obtain the report object.
     outcome = yield
     rep = outcome.get_result()
