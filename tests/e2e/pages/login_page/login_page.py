@@ -1,6 +1,6 @@
 from tests.e2e.pages.login_page.login_page_locators import Login_PageLocators as LgLocators
 from tests.e2e.pages.login_page.login_page_notifications import LoginPageNotifications as LgNoti
-from core.base_page import BasePage
+from core.utils.base_page import BasePage
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
 

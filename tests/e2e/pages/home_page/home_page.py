@@ -1,5 +1,5 @@
 from tests.e2e.pages.home_page.home_page_notifications import HomePageNotifications as Noti
-from core.base_page import BasePage
+from core.utils.base_page import BasePage
 from tests.e2e.pages.home_page.home_page_locators import HomePageLocators as el
 
 

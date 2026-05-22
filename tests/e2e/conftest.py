@@ -1,6 +1,6 @@
 import pytest
 
-from core.driver_factory import DriverFactory
+from core.utils.driver_factory import DriverFactory
 from core.utils.logs import get_logger
 from core.utils.screenshot import take_screenshot
 
