@@ -1,9 +1,5 @@
-from locust import HttpUser, task, between
+from users.authenticated_user import AuthenticatedUser
+from users.browsing_user import BrowsingUser
 
 
-class WebsiteUser(HttpUser):
-    wait_time = between(1, 3)
-
-    @task
-    def health_check(self):
-        self.client.get("/")
+__all__ = ["BrowsingUser", "AuthenticatedUser"]
