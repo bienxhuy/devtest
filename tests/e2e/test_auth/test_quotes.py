@@ -16,6 +16,8 @@ class TestQuotes:
         quote_page.open_page()
 
     # EA-06
+    @pytest.mark.e2e
+    @pytest.mark.regression
     @pytest.mark.xdist_group(name="quote_tests")
     def test_view_public_quotes(self, login_and_go_to_quotes, home_page, quote_page, sample_quote):
         logger.info("[TEST] EA-06 test_view_public_quotes starts")
@@ -33,6 +35,8 @@ class TestQuotes:
         logger.info("[TEST] EA-06 passed")
 
     # EA-07
+    @pytest.mark.e2e
+    @pytest.mark.regression
     @pytest.mark.xdist_group(name="quote_tests")
     def test_create_quote(self, login_and_go_to_quotes, quote_page, sample_quote):
         logger.info("[TEST] EA-07 test_create_quote starts")
@@ -44,6 +48,8 @@ class TestQuotes:
         logger.info("[TEST] EA-07 passed")
 
     # EA-08
+    @pytest.mark.e2e
+    @pytest.mark.regression
     @pytest.mark.xdist_group(name="quote_tests")
     def test_delete_own_quote(self, login_and_go_to_quotes, quote_page, second_quote):
         logger.info("[TEST] EA-08 test_delete_own_quote starts")
