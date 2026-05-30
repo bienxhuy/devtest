@@ -1,16 +1,18 @@
 {
   "accounts": {
     "regular_user": {
+      "name": "Bien Xuan Huy",
       "email": "bxh@gmail.com",
-      "password": "Huy123456",
-      "name": "Bien Xuan Huy"
+      "password": "Huy123456"
     }
   },
-  "negative_cases": {
-    "invalid_password": "wrong_password123",
-    "sql_injection_password": "123456"
+  "new_user": {
+    "name": "New User",
+    "email": "newuser@example.com",
+    "password": "NewPass123!"
   },
-  "security_payloads": {
-    "sql_injection": "' OR 1=1 --"
+  "quotes": {
+    "sample": "The only way to do great work is to love what you do.",
+    "second": "In the middle of every difficulty lies opportunity."
   }
 }

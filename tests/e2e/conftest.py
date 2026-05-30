@@ -1,11 +1,19 @@
+import os
 import pytest
+from dotenv import load_dotenv
 
 from core.utils.driver_factory import DriverFactory
 from core.utils.logs import get_logger
 from core.utils.screenshot import take_screenshot
 
 
+load_dotenv()
 logger = get_logger()
+
+
+@pytest.fixture(scope="session")
+def base_url():
+    return os.getenv("FE_URL")
 
 
 @pytest.fixture(scope="function")
@@ -20,7 +28,7 @@ def driver():
 
 # Fixtures for taking screenshots on failure
 @pytest.hookimpl(hookwrapper=True)
-def pytest_runtest_makereport(item, _):
+def pytest_runtest_makereport(item, call):
     # Execute all other hooks first to obtain the report object.
     outcome = yield
     rep = outcome.get_result()

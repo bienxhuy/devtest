@@ -1,27 +1,19 @@
-class Login_PageLocators:
-    # Login email input field
-    LOGIN_EMAIL_INPUT = "//*[@id=\"login-email-input\"]"
-    # Login password input field
-    LOGIN_PASSWORD_INPUT = "//*[@id=\"login-password-input\"]"
-    # Login button
-    LOGIN_BUTTON = "//*[@id=\"login-submit-button\"]"
-    
-    # Register name input field
-    REGISTER_NAME_INPUT = "//*[@id=\"register-name-input\"]"
-    # Register email input field
-    REGISTER_EMAIL_INPUT = "//*[@id=\"register-email-input\"]"
-    # Register password input field
-    REGISTER_PASSWORD_INPUT = "//*[@id=\"register-password-input\"]"
-    # Register button
-    REGISTER_BUTTON = "//*[@id=\"register-submit-button\"]"
-    
-    # Switch login/register button
-    SWITCH_LOGIN_REGISTER_BUTTON = "//*[@id=\"auth-switch-mode-button\"]"
-    
-    # Back to home button
-    BACK_TO_HOME_BUTTON = "//*[@id=\"login-back-home-button\"]"
-    
-    # Error message 
-    LOGIN_ERROR_MESSAGE = "//*[@id=\"login-error-message\"]"
-    REGISTER_ERROR_MESSAGE = "//*[@id=\"register-error-message\"]"
+from selenium.webdriver.common.by import By
+
+
+class LoginPageLocators:
+    LOGIN_EMAIL_INPUT = (By.XPATH, "//*[@id='login-email-input']")
+    LOGIN_PASSWORD_INPUT = (By.XPATH, "//*[@id='login-password-input']")
+    LOGIN_BUTTON = (By.XPATH, "//*[@id='login-submit-button']")
+
+    REGISTER_NAME_INPUT = (By.XPATH, "//*[@id='register-name-input']")
+    REGISTER_EMAIL_INPUT = (By.XPATH, "//*[@id='register-email-input']")
+    REGISTER_PASSWORD_INPUT = (By.XPATH, "//*[@id='register-password-input']")
+    REGISTER_BUTTON = (By.XPATH, "//*[@id='register-submit-button']")
+
+    SWITCH_LOGIN_REGISTER_BUTTON = (By.XPATH, "//*[@id='auth-switch-mode-button']")
+    BACK_TO_HOME_BUTTON = (By.XPATH, "//*[@id='login-back-home-button']")
+
+    LOGIN_ERROR_MESSAGE = (By.XPATH, "//*[@id='login-error-message']")
+    REGISTER_ERROR_MESSAGE = (By.XPATH, "//*[@id='register-error-message']")
     

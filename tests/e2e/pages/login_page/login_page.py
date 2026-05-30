@@ -1,38 +1,47 @@
-from tests.e2e.pages.login_page.login_page_locators import Login_PageLocators as LgLocators
-from tests.e2e.pages.login_page.login_page_notifications import LoginPageNotifications as LgNoti
-from core.utils.base_page import BasePage
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support.ui import WebDriverWait
+from tests.e2e.pages.login_page.login_page_locators import LoginPageLocators as LgLocators
+from core.utils.base_page import BasePage
+from core.utils.logs import get_logger
+
+
+logger = get_logger()
 
 
 class LoginPage(BasePage):
-    def __init__(self, driver):
-        super().__init__(driver)
-        self.go_to_url(self.BASE_URL + "/login")
-    
-    # Login action - returns notification message
+    def __init__(self, driver, base_url):
+        super().__init__(driver, base_url)
+        self.open_page()
+
+    def open_page(self):
+        self.open(self.base_url + "/login")
+
     def login(self, email, password):
-        self.send_keys(LgLocators.LOGIN_EMAIL_INPUT, email, "", "Login Email Input")
-        self.send_keys(LgLocators.LOGIN_PASSWORD_INPUT, password, "", "Login Password Input")
-        return self.safe_click(LgLocators.LOGIN_BUTTON, LgNoti.LOGIN_BUTTON_CLICKED_SUCCESS, "Login Button")
-    
-    # Register action - returns notification message
+        self.fill(LgLocators.LOGIN_EMAIL_INPUT, email, name="login email input")
+        self.fill(LgLocators.LOGIN_PASSWORD_INPUT, password, name="login password input")
+        self.click(LgLocators.LOGIN_BUTTON, name="login button")
+
     def register(self, name, email, password):
-        self.send_keys(LgLocators.REGISTER_NAME_INPUT, name, "", "Register Name Input")
-        self.send_keys(LgLocators.REGISTER_EMAIL_INPUT, email, "", "Register Email Input")
-        self.send_keys(LgLocators.REGISTER_PASSWORD_INPUT, password, "", "Register Password Input")
-        return self.safe_click(LgLocators.REGISTER_BUTTON, LgNoti.REGISTER_BUTTON_CLICKED_SUCCESS, "Register Button")
-        
-    # Check if login was successful
+        self.fill(LgLocators.REGISTER_NAME_INPUT, name, name="register name input")
+        self.fill(LgLocators.REGISTER_EMAIL_INPUT, email, name="register email input")
+        self.fill(LgLocators.REGISTER_PASSWORD_INPUT, password, name="register password input")
+        self.click(LgLocators.REGISTER_BUTTON, name="register button")
+
+    def switch_mode(self):
+        self.click(LgLocators.SWITCH_LOGIN_REGISTER_BUTTON, name="switch mode button")
+
+    def get_login_error(self):
+        return self.get_text(LgLocators.LOGIN_ERROR_MESSAGE, name="login error message")
+
+    def get_register_error(self):
+        return self.get_text(LgLocators.REGISTER_ERROR_MESSAGE, name="register error message")
+
     def is_logged_in(self):
-        from core.utils.logs import get_logger
-        logger = get_logger()
-        # In SPA flows, redirect can happen after click without a full page reload.
         try:
             WebDriverWait(self.driver, 10).until(
                 lambda d: "/login" not in d.current_url
             )
+            return True
         except TimeoutException:
-            logger.warning(f"[LOGIN_PAGE] Login check timed out, still on URL: {self.driver.current_url}")
+            logger.warning(f"[LOGIN_PAGE] Still on login URL: {self.driver.current_url}")
             return False
-        return True

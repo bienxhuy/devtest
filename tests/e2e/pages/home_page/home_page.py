@@ -1,19 +1,37 @@
-from tests.e2e.pages.home_page.home_page_notifications import HomePageNotifications as Noti
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support.ui import WebDriverWait
+from tests.e2e.pages.home_page.home_page_locators import HomePageLocators as HpLocators
 from core.utils.base_page import BasePage
-from tests.e2e.pages.home_page.home_page_locators import HomePageLocators as el
+from core.utils.logs import get_logger
+
+
+logger = get_logger()
 
 
 class HomePage(BasePage):
-    def __init__(self, driver):
-        super().__init__(driver)
-        self.go_to_url(self.BASE_URL)
+    def __init__(self, driver, base_url):
+        super().__init__(driver, base_url)
+        self.open_page()
 
-    # Click home action button
-    def click_home_action_button(self):
-        self.click(el.HOME_ACTION_BUTTON)
-        return Noti(self.driver)
+    def open_page(self):
+        self.open(self.base_url)
 
-    # Check home header
-    def check_home_header(self, expected_header):
-        actual_header = self.get_inner_text(el.HOME_HEADER)
-        return actual_header == expected_header
+    def go_to_login(self):
+        self.click(HpLocators.LOGIN_BUTTON, name="login button")
+
+    def logout(self):
+        self.click(HpLocators.LOGOUT_BUTTON, name="logout button")
+
+    def go_to_quotes(self):
+        self.click(HpLocators.QUOTE_PAGE_BUTTON, name="quote page button")
+
+    def get_logged_out_hero_text(self):
+        return self.get_text(HpLocators.LOGGED_OUT_HERO, name="logged out hero text")
+
+    def get_logged_in_hero_text(self):
+        return self.get_text(HpLocators.LOGGED_IN_HERO, name="logged in hero text")
+
+    def is_logged_out(self):
+        button_text = self.get_text(HpLocators.LOGIN_BUTTON, name="auth button")
+        button_text = button_text.strip().lower()
+        return button_text == "login"
