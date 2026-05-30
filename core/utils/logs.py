@@ -23,7 +23,7 @@ LOG_FILE = os.path.join(LOG_DIR, f"{WORKER_ID}.log")
 # avoid creating multiple instances with the same name
 def get_logger(name=__name__, console_log=False):
     logger = logging.getLogger(name)
-    logger.setLevel(logging.INFO)
+    logger.setLevel(logging.DEBUG)
 
     # Check if the logger already has handlers to avoid duplicate logs
     if not logger.handlers:
