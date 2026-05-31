@@ -3,7 +3,22 @@ from .postexec import (
     Unstable
 )
 
+from .build_summary import (
+    BuildSummary
+)
+
+from .formatters import (
+    LineProtocolFormatter
+)
+
+from .runners import (
+    Runners
+)
+
 __all__ = [
     "PostExec",
-    "Unstable"
+    "Unstable",
+    "LineProtocolFormatter",
+    "Runners",
+    "BuildSummary"
 ]
