@@ -1,5 +1,4 @@
 import pytest
-from core.utils.api_client import APIClient
 from core.utils.logs import get_logger
 from tests.api.helpers.api_endpoints import APIEndpoints
 from tests.api.mock_data.users import UserPayloadBuilder

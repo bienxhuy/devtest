@@ -9,7 +9,7 @@ logger = get_logger()
 
 
 @pytest.fixture
-def other_user_client():
+def other_user_client(base_url):
     logger.info("[API_FIXTURES] Creating authenticated client for a second user")
-    _, token = register_and_login()
-    return APIClient(token=token)
+    _, token = register_and_login(base_url)
+    return APIClient(base_url=base_url, token=token)

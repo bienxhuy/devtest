@@ -7,11 +7,11 @@ from tests.api.helpers.api_endpoints import APIEndpoints
 logger = get_logger()
 
 
-def register_and_login():
+def register_and_login(base_url):
     """This helper registers a new user and logs in to get a valid token.
     Returns (payload, token) for the new user."""
     logger.info("[API_AUTH] Registering a fresh user and requesting access token")
-    client = APIClient()
+    client = APIClient(base_url=base_url)
     payload = UserPayloadBuilder().build()
     register_res = client.post(APIEndpoints.register, json=payload)
     logger.debug(f"[API_AUTH] Register response -> {register_res.status_code}")

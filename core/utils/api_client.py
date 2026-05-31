@@ -3,8 +3,8 @@ import requests
 
 
 class APIClient:
-    def __init__(self, token=None):
-        self.base_url = os.getenv("BASE_URL", "http://localhost:3000")
+    def __init__(self, base_url, token=None):
+        self.base_url = base_url
         self.session = requests.Session()
         if token:
             self.session.headers["Authorization"] = f"Bearer {token}"

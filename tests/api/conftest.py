@@ -2,33 +2,40 @@ import pytest
 from core.utils.api_client import APIClient
 from core.utils.logs import get_logger
 from tests.api.helpers.auth import register_and_login
+import os
+from dotenv import load_dotenv
 
 
 logger = get_logger()
-
-
-@pytest.fixture
-def api_client():
-    """A fresh APIClient with no auth. 
-    Use for testing endpoints that don't require login."""
-    logger.info("[API_FIXTURES] Creating unauthenticated API client")
-    return APIClient()
+load_dotenv()
 
 
 @pytest.fixture(scope="session")
-def registered_user():
+def base_url():
+    return os.getenv("BE_URL")
+
+@pytest.fixture
+def api_client(base_url):
+    """A fresh APIClient with no auth. 
+    Use for testing endpoints that don't require login."""
+    logger.info("[API_FIXTURES] Creating unauthenticated API client")
+    return APIClient(base_url=base_url)
+
+
+@pytest.fixture(scope="session")
+def registered_user(base_url):
     """Returns (payload, token) for a seeded user. Created once per session."""
     logger.info("[API_FIXTURES] Creating session-scoped registered user")
-    return register_and_login()
+    return register_and_login(base_url)
 
 
 @pytest.fixture
-def auth_client(registered_user):
+def auth_client(registered_user, base_url):
     """An APIClient that has completed login with a valid token (no session cookies) 
     - returns the client itself."""
     _, token = registered_user
     logger.info("[API_FIXTURES] Creating authenticated API client")
-    return APIClient(token=token)
+    return APIClient(base_url=base_url, token=token)
 
 
 @pytest.hookimpl(hookwrapper=True)
