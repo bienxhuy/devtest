@@ -191,3 +191,19 @@ class LineProtocolFormatter:
             f"mean_test_duration={summary['mean_test_duration']}"
         )
         return f"{measurement},{tags} {fields} {self.timestamp}"
+    
+    def locust_run_time_parser(self, time_str: str) -> int:
+        """Convert locust time string (e.g. '1m') to seconds."""
+        total_seconds = 0
+        if 'h' in time_str:
+            hours = int(time_str.split('h')[0])
+            total_seconds += hours * 3600
+            time_str = time_str.split('h')[1]
+        if 'm' in time_str:
+            minutes = int(time_str.split('m')[0])
+            total_seconds += minutes * 60
+            time_str = time_str.split('m')[1]
+        if 's' in time_str:
+            seconds = float(time_str.split('s')[0])
+            total_seconds += seconds
+        return int(total_seconds)

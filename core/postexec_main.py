@@ -130,7 +130,7 @@ if __name__ == "__main__":
         # PERFORMANCE TEST PHASE
         logger.info("[POST EXECUTION] - Processing performance test results.")
         perf_context = {
-            "execution_time_s": int(PERFORMANCE_RUN_TIME),
+            "execution_time_s": formatter.locust_run_time_parser(PERFORMANCE_RUN_TIME),
             "users": int(PERFORMANCE_USERS),
             "spawn_rate": int(PERFORMANCE_SPAWN_RATE) }
         perf_summary, perf_details_metrics, perf_failures = Runners.run_performance(
