@@ -6,7 +6,7 @@ logger = get_logger()
 
 
 @pytest.fixture
-def login_and_go_to_quotes(self, login_page, quote_page, regular_user_account):
+def login_and_go_to_quotes(login_page, quote_page, regular_user_account):
     """Logs in with the provided account and navigates to the quote page."""
     account = regular_user_account
     login_page.open_page()
@@ -18,7 +18,7 @@ def login_and_go_to_quotes(self, login_page, quote_page, regular_user_account):
 @pytest.mark.e2e
 @pytest.mark.regression
 @pytest.mark.xdist_group(name="quote_tests")
-def test_view_public_quotes(self, login_and_go_to_quotes, home_page, quote_page, sample_quote):
+def test_view_public_quotes(login_and_go_to_quotes, home_page, quote_page, sample_quote):
     logger.info("[TEST] EA-06 test_view_public_quotes starts")
     # Reopen because home_page fixture automatically navigates to home after initiation
     quote_page.open_page()
@@ -37,7 +37,7 @@ def test_view_public_quotes(self, login_and_go_to_quotes, home_page, quote_page,
 @pytest.mark.e2e
 @pytest.mark.regression
 @pytest.mark.xdist_group(name="quote_tests")
-def test_create_quote(self, login_and_go_to_quotes, quote_page, sample_quote):
+def test_create_quote(login_and_go_to_quotes, quote_page, sample_quote):
     logger.info("[TEST] EA-07 test_create_quote starts")
     quote_page.create_quote(sample_quote)
     first_quote = quote_page.get_first_quote_text()
@@ -50,7 +50,7 @@ def test_create_quote(self, login_and_go_to_quotes, quote_page, sample_quote):
 @pytest.mark.e2e
 @pytest.mark.regression
 @pytest.mark.xdist_group(name="quote_tests")
-def test_delete_own_quote(self, login_and_go_to_quotes, quote_page, second_quote):
+def test_delete_own_quote(login_and_go_to_quotes, quote_page, second_quote):
     logger.info("[TEST] EA-08 test_delete_own_quote starts")
     quote_page.create_quote(second_quote)
 
