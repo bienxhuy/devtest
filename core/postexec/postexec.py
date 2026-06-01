@@ -113,7 +113,7 @@ class PostExec():
             for case in suite:
                 if case.is_failure or case.is_error:
                     failed_tests.append({
-                        "test_path": f"{case.classname.replace('.', os.sep)}.py::{case.name}",
+                        "test_path": f"{case.classname.replace('.', os.sep)}.py::{case.name.split('@')[0]}",
                         "case": case
                         })
         return failed_tests
