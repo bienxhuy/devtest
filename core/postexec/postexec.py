@@ -400,7 +400,7 @@ class PostExec():
         logger.info(f"[POST EXECUTION] - Sending records to InfluxDB at {host}.")
         # Base URL to write & parameters
         url = f"{host}/api/v3/write_lp?"
-        url += f"db={database}&precision=microsecond&accept_partial=true&no_sync=true"
+        url += f"db={database}&precision=auto&accept_partial=true&no_sync=true"
         # HTTP header & data
         headers = {
             "Authorization": f"Token {token}",
