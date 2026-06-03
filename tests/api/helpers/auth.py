@@ -25,10 +25,3 @@ def register_and_login(base_url):
     token = res.json()["data"]["accessToken"]
     logger.info("[API_AUTH] Fresh user authenticated successfully")
     return payload, token
-
-
-# if __name__ == "__main__":
-#     user_info, access_token = register_and_login()
-#     print("Registered user:", user_info)
-#     print("Access token:", access_token)
-    
