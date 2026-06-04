@@ -64,3 +64,15 @@ def test_delete_own_quote(login_and_go_to_quotes, quote_page, second_quote):
         "Deleted quote should no longer appear in the list"
     )
     logger.info("[TEST] EA-08 passed")
+
+def test_unstable_expected_1():
+    logger.info("[TEST] Unstable test starts")
+    import random
+    assert random.choice([True, False]), "This test is expected to fail about 50% of the time"
+    logger.info("[TEST] Unstable test passed")
+
+def test_unstable_expected_2():
+    logger.info("[TEST] Unstable test starts")
+    import random
+    assert random.choice([True, False]), "This test is expected to fail about 50% of the time"
+    logger.info("[TEST] Unstable test passed")
