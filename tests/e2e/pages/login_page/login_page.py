@@ -11,7 +11,6 @@ logger = get_logger()
 class LoginPage(BasePage):
     def __init__(self, driver, base_url):
         super().__init__(driver, base_url)
-        self.open_page()
 
     def open_page(self):
         self.open(self.base_url + "/login")

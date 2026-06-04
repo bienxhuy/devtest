@@ -10,6 +10,7 @@ logger = get_logger()
 @pytest.mark.regression
 def test_regular_login(login_page, regular_user_account):
     logger.info("[TEST] EA-01 test_regular_login starts")
+    login_page.open_page()
     login_page.login(
         email=regular_user_account["email"],
         password=regular_user_account["password"]
@@ -24,6 +25,7 @@ def test_regular_login(login_page, regular_user_account):
 @pytest.mark.regression
 def test_register_new_user(login_page, new_user):
     logger.info("[TEST] EA-02 test_register_new_user starts")
+    login_page.open_page()
     login_page.switch_mode()
     login_page.register(
         name=new_user["name"],
@@ -40,6 +42,7 @@ def test_register_new_user(login_page, new_user):
 @pytest.mark.regression
 def test_login_invalid_password(login_page, regular_user_account):
     logger.info("[TEST] EA-03 test_login_invalid_password starts")
+    login_page.open_page()
     login_page.login(
         email=regular_user_account["email"],
         password="WrongPassword999!"
@@ -54,6 +57,7 @@ def test_login_invalid_password(login_page, regular_user_account):
 @pytest.mark.regression
 def test_logout(home_page, login_page, regular_user_account):
     logger.info("[TEST] EA-04 test_logout starts")
+    login_page.open_page()
     login_page.login(
         email=regular_user_account["email"],
         password=regular_user_account["password"]
@@ -70,6 +74,7 @@ def test_logout(home_page, login_page, regular_user_account):
 @pytest.mark.regression
 def test_home_page_logged_in_state(home_page, login_page, regular_user_account):
     logger.info("[TEST] EA-05 test_home_page_logged_in_state starts")
+    login_page.open_page()
     login_page.login(
         email=regular_user_account["email"],
         password=regular_user_account["password"]

@@ -21,7 +21,6 @@ def login_and_go_to_quotes(login_page, quote_page, regular_user_account):
 def test_view_public_quotes(login_and_go_to_quotes, home_page, quote_page, sample_quote):
     logger.info("[TEST] EA-06 test_view_public_quotes starts")
     # Reopen because home_page fixture automatically navigates to home after initiation
-    quote_page.open_page()
     quote_page.create_quote(sample_quote)
     
     home_page.open_page()
