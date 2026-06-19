@@ -1,0 +1,18 @@
+{
+  "accounts": {
+    "regular_user": {
+      "name": "Bien Xuan Huy",
+      "email": "bxh@gmail.com",
+      "password": "Huy123456"
+    }
+  },
+  "new_user": {
+    "name": "New User",
+    "email": "newuser@example.com",
+    "password": "NewPass123!"
+  },
+  "quotes": {
+    "sample": "The only way to do great work is to love what you do.",
+    "second": "In the middle of every difficulty lies opportunity."
+  }
+}
